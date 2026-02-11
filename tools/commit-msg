@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -e
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Skip merge commits
+if grep -qE "^Merge|^Revert" "$COMMIT_MSG_FILE"; then
+  exit 0
+fi
+
+# Check format: Layer: Description [R#/C#]
+if ! echo "$COMMIT_MSG" | grep -qE "^(Domain|Database|API|Integrations|Structure): .+ \[R[1-4]/C[1-5]\]"; then
+  echo ""
+  echo "❌ Invalid commit format"
+  echo ""
+  echo "Expected: Layer: Description [R#/C#]"
+  echo ""
+  echo "Examples:"
+  echo "  Domain: Add user entity [R1/C2]"
+  echo "  Database: Add user persistence [R2/C2]"
+  echo "  API: Add registration endpoint [R3/C2]"
+  echo "  Integrations: Add email service [R4/C2]"
+  echo ""
+  echo "Layers (R#):"
+  echo "  R1: Domain"
+  echo "  R2: Database"
+  echo "  R3: API"
+  echo "  R4: Integrations"
+  echo ""
+  echo "Classifications (C#):"
+  echo "  C1: Internal"
+  echo "  C2: Feature"
+  echo "  C3: Contract"
+  echo "  C4: Structure"
+  echo "  C5: Migration"
+  echo ""
+  exit 1
+fi
+
+exit 0

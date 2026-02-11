@@ -1,0 +1,145 @@
+{
+  "version": "1.0.0",
+  "specification": "../specs/01-architecture.md",
+  "enforcement_mode": "blocking",
+  
+  "responsibility_groups": {
+    "R1_domain": {
+      "name": "Domain",
+      "description": "Business rules, invariants, entities, value objects",
+      "allowed_dependencies": [],
+      "forbidden_dependencies": ["R2", "R3", "R4", "R5"],
+      "stability": "highest",
+      "change_frequency": "rare"
+    },
+    "R2_application": {
+      "name": "Application",
+      "description": "Use cases, workflows, coordination logic",
+      "allowed_dependencies": ["R1"],
+      "forbidden_dependencies": ["R3", "R4", "R5"],
+      "stability": "high",
+      "change_frequency": "moderate"
+    },
+    "R3_interface": {
+      "name": "Interface",
+      "description": "Input/output translation, controllers, DTO mapping",
+      "allowed_dependencies": ["R2", "R1"],
+      "forbidden_dependencies": ["R4", "R5"],
+      "stability": "medium",
+      "change_frequency": "frequent"
+    },
+    "R4_infrastructure": {
+      "name": "Infrastructure",
+      "description": "Persistence, external systems, side effects",
+      "allowed_dependencies": ["R2", "R1"],
+      "forbidden_dependencies": ["R3", "R5"],
+      "stability": "medium",
+      "change_frequency": "frequent"
+    },
+    "R5_presentation": {
+      "name": "Presentation",
+      "description": "UI, client state, rendering",
+      "allowed_dependencies": ["R3", "R2", "R1"],
+      "forbidden_dependencies": ["R4"],
+      "stability": "lowest",
+      "change_frequency": "very_frequent"
+    }
+  },
+
+  "dependency_validation_rules": {
+    "strict_direction": true,
+    "circular_dependencies": "forbidden",
+    "cross_layer_shortcuts": "forbidden",
+    "notes": "Any violation is a fatal architectural error"
+  },
+
+  "runtime_assignments": {
+    "browser": ["R5"],
+    "server_stateless": ["R3"],
+    "server_stateful": ["R2"],
+    "environment_bound": ["R4"],
+    "pure_computation": ["R1"],
+    "cross_runtime_exception": "R1 may be consumed by multiple runtime contexts"
+  },
+
+  "language_boundaries": {
+    "enforcement": "align_with_responsibility_groups",
+    "rule": "Language boundaries SHALL reinforce R-group boundaries",
+    "example": {
+      "systems_language": ["R1", "R2", "R3", "R4"],
+      "ui_language": ["R5"],
+      "query_language": ["R4"]
+    },
+    "notes": "Specific languages are implementation-defined, but boundaries must align"
+  },
+
+  "file_structure_rules": {
+    "one_directory_per_r_group": true,
+    "default_structure": "flat",
+    "subdirectory_threshold": {
+      "min_items_same_concern": 3,
+      "max_files_per_directory": 20
+    },
+    "notes": "Structure emerges from necessity, not anticipation"
+  },
+
+  "interface_rules": {
+    "dependency_inversion": "mandatory",
+    "domain_interfaces": "MAY be defined in R1",
+    "application_interfaces": "SHALL be defined in R2",
+    "implementations": "SHALL exist only in R4"
+  },
+
+  "review_checklist": [
+    {
+      "step": 1,
+      "question": "Which R-group does this artifact belong to?",
+      "valid_answers": ["R1", "R2", "R3", "R4", "R5"],
+      "enforcement": "blocking"
+    },
+    {
+      "step": 2,
+      "question": "Are all dependencies valid per D2 rules?",
+      "check": "validate against allowed_dependencies",
+      "enforcement": "blocking"
+    },
+    {
+      "step": 3,
+      "question": "Is runtime assignment correct per D3?",
+      "check": "validate against runtime_assignments",
+      "enforcement": "blocking"
+    },
+    {
+      "step": 4,
+      "question": "Does language align with R-group per D4?",
+      "check": "validate against language_boundaries",
+      "enforcement": "blocking"
+    },
+    {
+      "step": 5,
+      "question": "What is the stability impact per D5?",
+      "check": "inward changes forbidden, outward changes require C4 classification",
+      "enforcement": "blocking"
+    }
+  ],
+
+  "prohibited_patterns": [
+    "mixed_responsibility_artifacts",
+    "inline_persistence_outside_R4",
+    "framework_types_in_R1_or_R2",
+    "runtime_leakage",
+    "implicit_architectural_assumptions"
+  ],
+
+  "ai_instructions": {
+    "before_generating_code": [
+      "Identify target R-group for new code",
+      "Validate all dependencies against allowed_dependencies",
+      "Confirm runtime alignment",
+      "Verify language boundary compliance",
+      "Assess stability impact"
+    ],
+    "on_violation": "HALT code generation and report violation",
+    "on_ambiguity": "Request clarification before proceeding"
+  }
+}

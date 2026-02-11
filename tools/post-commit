@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# Get commit info
+COMMIT_HASH=$(git log -1 --format=%h)
+COMMIT_MSG=$(git log -1 --format=%s)
+
+# Get changed files by layer
+DOMAIN_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/domain/" || true)
+DATABASE_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/database/" || true)
+API_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/api/" || true)
+INTEGRATION_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/integrations/" || true)
+
+# Check if tests pass (simple check - can be enhanced)
+TEST_STATUS="● ONLINE"
+if [ -f "package.json" ]; then
+  if ! npm test &>/dev/null; then
+    TEST_STATUS="○ OFFLINE"
+  fi
+elif [ -f "pytest.ini" ] || [ -f "pyproject.toml" ]; then
+  if ! pytest &>/dev/null; then
+    TEST_STATUS="○ OFFLINE"
+  fi
+fi
+
+echo ""
+echo "COMMIT: $COMMIT_MSG [$COMMIT_HASH]"
+echo ""
+
+# Display changed layers
+if [ -n "$DOMAIN_FILES" ]; then
+  echo "R1 • Domain"
+  while IFS= read -r file; do
+    [ -n "$file" ] && echo "  $(basename "$file") $TEST_STATUS"
+  done <<< "$DOMAIN_FILES"
+  echo ""
+fi
+
+if [ -n "$DATABASE_FILES" ]; then
+  echo "R2 • Database"
+  while IFS= read -r file; do
+    [ -n "$file" ] && echo "  $(basename "$file") $TEST_STATUS"
+  done <<< "$DATABASE_FILES"
+  echo ""
+fi
+
+if [ -n "$API_FILES" ]; then
+  echo "R3 • API"
+  while IFS= read -r file; do
+    [ -n "$file" ] && echo "  $(basename "$file") $TEST_STATUS"
+  done <<< "$API_FILES"
+  echo ""
+fi
+
+if [ -n "$INTEGRATION_FILES" ]; then
+  echo "R4 • Integrations"
+  while IFS= read -r file; do
+    [ -n "$file" ] && echo "  $(basename "$file") $TEST_STATUS"
+  done <<< "$INTEGRATION_FILES"
+  echo ""
+fi
+
+# Overall status
+if [[ "$TEST_STATUS" == "● ONLINE" ]]; then
+  echo "STATUS: ● ALL ONLINE"
+else
+  echo "STATUS: ○ PARTIAL"
+fi
+echo ""
+
+exit 0

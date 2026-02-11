@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Validating"
+echo ""
+
+# Check dependency flow
+echo "Dependencies"
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(py|js|ts|jsx|tsx)$' || true)
+
+if [ -n "$STAGED_FILES" ]; then
+  VIOLATION=0
+  
+  while IFS= read -r file; do
+    if [[ "$file" =~ src/domain/ ]]; then
+      # R1 cannot import R2, R3, R4
+      if grep -qE "from.*(database|api|integrations)" "$file" 2>/dev/null || \
+         grep -qE "import.*(database|api|integrations)" "$file" 2>/dev/null || \
+         grep -qE "require.*['\"].*(database|api|integrations)" "$file" 2>/dev/null; then
+        echo "  ✗ Violation detected"
+        echo "    $file imports database/api/integrations"
+        echo ""
+        echo "Fix: Remove import or use dependency inversion"
+        VIOLATION=1
+      fi
+    elif [[ "$file" =~ src/database/ ]]; then
+      # R2 cannot import R3, R4
+      if grep -qE "from.*(api|integrations)" "$file" 2>/dev/null || \
+         grep -qE "import.*(api|integrations)" "$file" 2>/dev/null || \
+         grep -qE "require.*['\"].*(api|integrations)" "$file" 2>/dev/null; then
+        echo "  ✗ Violation detected"
+        echo "    $file imports api/integrations"
+        echo ""
+        echo "Fix: Remove import or move logic to R3"
+        VIOLATION=1
+      fi
+    elif [[ "$file" =~ src/api/ ]]; then
+      # R3 cannot import R4
+      if grep -qE "from.*integrations" "$file" 2>/dev/null || \
+         grep -qE "import.*integrations" "$file" 2>/dev/null || \
+         grep -qE "require.*['\"].*integrations" "$file" 2>/dev/null; then
+        echo "  ✗ Violation detected"
+        echo "    $file imports integrations"
+        echo ""
+        echo "Fix: Remove import or move logic to R4"
+        VIOLATION=1
+      fi
+    fi
+  done <<< "$STAGED_FILES"
+  
+  if [ $VIOLATION -eq 1 ]; then
+    exit 1
+  fi
+fi
+
+echo "  ✓ Flow correct"
+echo ""
+
+# Run tests if they exist
+if [ -d "tests" ] || [ -f "package.json" ] && grep -q "\"test\"" package.json 2>/dev/null; then
+  echo "Tests"
+  
+  if [ -f "package.json" ]; then
+    if npm test 2>/dev/null; then
+      echo "  ✓ All pass"
+    else
+      FAILED_TESTS=$(npm test 2>&1 | grep -oP '(?<=✗ ).*' || echo "See output above")
+      echo "  ✗ Failures detected"
+      echo "    $FAILED_TESTS"
+      echo ""
+      echo "Fix tests before committing"
+      exit 1
+    fi
+  elif [ -f "pytest.ini" ] || [ -f "pyproject.toml" ]; then
+    if pytest 2>/dev/null; then
+      echo "  ✓ All pass"
+    else
+      echo "  ✗ Failures detected"
+      echo ""
+      echo "Fix tests before committing"
+      exit 1
+    fi
+  fi
+  echo ""
+fi
+
+exit 0

@@ -1,0 +1,7 @@
+# Don't publish test files
+test/
+*.test.js
+
+# Don't publish dev files
+.git/
+.github/

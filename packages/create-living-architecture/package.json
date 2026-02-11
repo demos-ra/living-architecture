@@ -1,0 +1,34 @@
+{
+  "name": "create-living-architecture",
+  "version": "1.0.0",
+  "description": "Scaffold a Living Architecture project with gravitational code organization",
+  "main": "index.js",
+  "bin": {
+    "create-living-architecture": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "architecture",
+    "code-organization",
+    "ai-coding",
+    "clean-architecture",
+    "git-hooks",
+    "scaffolding",
+    "gravitational-design"
+  ],
+  "author": "Demos Ra",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/demos-ra/living-architecture.git"
+  },
+  "bugs": {
+    "url": "https://github.com/demos-ra/living-architecture/issues"
+  },
+  "homepage": "https://github.com/demos-ra/living-architecture#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
