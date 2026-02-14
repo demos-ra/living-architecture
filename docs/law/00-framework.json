@@ -1,0 +1,133 @@
+{
+  "version": "1.1.0",
+  "specification": "../specs/00-framework.md",
+  "framework": "R1-6-pluggable",
+  
+  "skip_matrix": {
+    "config": {
+      "name": "Configuration",
+      "required": false,
+      "depends_on": [],
+      "add_when": "configuration_concerns > 5",
+      "description": "Environment variables, feature flags, deployment parameters",
+      "examples": ["Feature flags", "Multi-tenant config", "Deployment secrets"]
+    },
+    "domain": {
+      "name": "Domain",
+      "required": false,
+      "depends_on": [],
+      "add_when": "business_rules > 10",
+      "description": "Business entities, invariants, value objects",
+      "examples": ["User entity", "Payment rules", "Order business logic"]
+    },
+    "application": {
+      "name": "Application",
+      "required": false,
+      "depends_on": ["domain"],
+      "add_when": "workflows > 3 or state_machines_needed",
+      "description": "Use cases, workflows, orchestration",
+      "examples": ["CreateOrder workflow", "UserRegistration process"],
+      "note": "Can skip in pure CQRS or event-sourced systems"
+    },
+    "interface": {
+      "name": "Interface",
+      "required": true,
+      "depends_on": ["application"],
+      "add_when": "always",
+      "description": "API contracts, controllers, DTO mapping",
+      "examples": ["REST endpoints", "GraphQL resolvers", "CLI handlers"],
+      "critical": "Every system has boundaries. Never skip."
+    },
+    "infrastructure": {
+      "name": "Infrastructure",
+      "required": true,
+      "depends_on": ["application"],
+      "add_when": "always",
+      "description": "Persistence, external integrations, side effects",
+      "examples": ["Database repositories", "HTTP clients", "Message queues"],
+      "critical": "Every system executes somewhere. Never skip."
+    },
+    "presentation": {
+      "name": "Presentation",
+      "required": false,
+      "depends_on": ["interface"],
+      "add_when": "frontends > 1",
+      "description": "UI, views, rendering, client state",
+      "examples": ["React components", "Vue pages", "Mobile app"],
+      "note": "Skip if single web app. Split out when multiple frontends."
+    }
+  },
+
+  "evolution_phases": [
+    {
+      "phase": "tiny",
+      "name": "Minimal System (MVP)",
+      "active_layers": ["application", "interface", "infrastructure"],
+      "project_characteristics": {
+        "timeline": "< 3 months",
+        "team_size": "1-2 people",
+        "files": "50-150 total",
+        "frontends": 1,
+        "complexity": "low"
+      },
+      "validation_scope": "3-layer dependency checks only"
+    },
+    {
+      "phase": "small",
+      "name": "Growing System",
+      "active_layers": ["domain", "application", "interface", "infrastructure"],
+      "project_characteristics": {
+        "timeline": "3-12 months",
+        "team_size": "2-5 people",
+        "files": "200-400 total",
+        "frontends": 1,
+        "complexity": "moderate"
+      },
+      "validation_scope": "4-layer dependency checks"
+    },
+    {
+      "phase": "growing",
+      "name": "Expanding System",
+      "active_layers": ["domain", "application", "interface", "infrastructure", "presentation"],
+      "project_characteristics": {
+        "timeline": "1-3 years",
+        "team_size": "5-10 people",
+        "files": "500-1000 total",
+        "frontends": 2,
+        "complexity": "high"
+      },
+      "validation_scope": "5-layer dependency checks"
+    },
+    {
+      "phase": "enterprise",
+      "name": "Complex System",
+      "active_layers": ["config", "domain", "application", "interface", "infrastructure", "presentation"],
+      "project_characteristics": {
+        "timeline": "3+ years",
+        "team_size": "10+ people",
+        "files": "1000+ total",
+        "frontends": "2+",
+        "complexity": "very high"
+      },
+      "validation_scope": "all 6-layer dependency checks"
+    }
+  ],
+
+  "validation_rules": {
+    "mode": "adaptive",
+    "process": [
+      "1. Detect active R-groups (scan directory structure)",
+      "2. Load dependency rules from law/01-architecture.json",
+      "3. Filter rules to only active layers",
+      "4. Validate imports against filtered rules",
+      "5. Report violations only for active layers"
+    ],
+    "note": "Inactive layers are never validated, never cause errors"
+  },
+
+  "backward_compatibility": {
+    "v1_0_projects": "All v1.0 projects detected as having all 5 R-groups (R1-R5)",
+    "v1_0_validators": "Work unchanged with v1.1 framework",
+    "migration": "Zero-effort: update submodule to v1.1.0, no code changes"
+  }
+}

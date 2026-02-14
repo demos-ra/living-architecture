@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# Check if this is the first commit
+COMMIT_COUNT=$(git rev-list --count HEAD)
+
+if [ "$COMMIT_COUNT" -eq 1 ]; then
+  echo ""
+  echo "Living Architecture ━━━━━━━━━━━━━━━━━━━"
+  echo ""
+  echo "  ✓ Structure validated!"
+  echo ""
+  echo "  Code flows by dependency gravity:"
+  echo ""
+  echo "    R4 → R3 → R2 → R1"
+  echo "    "
+  echo "    Heavy (pure logic) sinks to R1"
+  echo "    Light (adapters) floats to R4"
+  echo ""
+  echo "  → .living-arch/SYSTEM.md"
+  echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━ Living Architecture"
+  echo ""
+  exit 0
+fi
+
+# Get commit info
+COMMIT_HASH=$(git log -1 --format=%h)
+COMMIT_MSG=$(git log -1 --format=%s)
+
+# Get changed files by layer
+DOMAIN_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/domain/" | xargs -n1 basename 2>/dev/null | paste -sd ", " -)
+DATABASE_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/database/" | xargs -n1 basename 2>/dev/null | paste -sd ", " -)
+API_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/api/" | xargs -n1 basename 2>/dev/null | paste -sd ", " -)
+INTEGRATION_FILES=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep "src/integrations/" | xargs -n1 basename 2>/dev/null | paste -sd ", " -)
+
+echo ""
+echo "Living Architecture ━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "  ✓ $COMMIT_MSG [$COMMIT_HASH]"
+echo ""
+
+# Display changed layers (one line per layer)
+[ -n "$DOMAIN_FILES" ] && echo "  R1 / $DOMAIN_FILES"
+[ -n "$DATABASE_FILES" ] && echo "  R2 / $DATABASE_FILES"
+[ -n "$API_FILES" ] && echo "  R3 / $API_FILES"
+[ -n "$INTEGRATION_FILES" ] && echo "  R4 / $INTEGRATION_FILES"
+
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━ Living Architecture"
+echo ""
+
+exit 0

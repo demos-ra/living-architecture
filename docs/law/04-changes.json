@@ -1,0 +1,285 @@
+{
+  "version": "1.0.0",
+  "specification": "../specs/04-changes.md",
+  "enforcement_mode": "blocking",
+  
+  "core_principle": "Every change SHALL declare its intent, scope, and blast radius. Implicit change is forbidden.",
+
+  "change_classifications": {
+    "C1_local_implementation": {
+      "name": "Local Implementation Change",
+      "definition": "Internal logic modification with no externally observable effect",
+      "characteristics": {
+        "interface_changes": false,
+        "schema_changes": false,
+        "invariant_changes": false,
+        "observable_behavior_change": false
+      },
+      "rules": [
+        "No interface changes",
+        "No schema changes",
+        "No invariant changes"
+      ],
+      "approval_requirements": {
+        "code_review": "standard",
+        "automated_tests": "must_pass",
+        "architecture_review": false,
+        "multi_person_approval": false
+      },
+      "examples": [
+        "Refactoring internal method implementation",
+        "Optimizing algorithm without changing output",
+        "Renaming private variables",
+        "Adding internal comments or documentation"
+      ],
+      "frequency": "common - should be cheap and fast",
+      "notes": "AI excels at C1 changes"
+    },
+
+    "C2_behavioral": {
+      "name": "Behavioral Change",
+      "definition": "Observable behavior change while interfaces remain stable",
+      "characteristics": {
+        "interface_changes": false,
+        "observable_behavior_change": true,
+        "contract_stability": "maintained"
+      },
+      "rules": [
+        "Inputs and outputs unchanged",
+        "Error kinds unchanged",
+        "Operational constraints preserved (O1-O7)"
+      ],
+      "approval_requirements": {
+        "code_review": "required",
+        "behavioral_test_coverage": "required",
+        "documentation_update": "if user-facing",
+        "architecture_review": false
+      },
+      "examples": [
+        "Changing validation logic (stricter or more lenient)",
+        "Modifying business rule implementation",
+        "Adjusting performance characteristics",
+        "Changing default values"
+      ],
+      "notes": "Behavior may change; expectations must not break"
+    },
+
+    "C3_contract": {
+      "name": "Contract Change",
+      "definition": "Interface, API, or schema modification",
+      "characteristics": {
+        "interface_changes": true,
+        "affects_external_consumers": true,
+        "requires_versioning": true
+      },
+      "rules": [
+        "Contracts SHALL be versioned",
+        "Backward compatibility SHALL be explicit",
+        "Migration path SHALL be defined"
+      ],
+      "approval_requirements": {
+        "code_review": "required",
+        "architecture_review": "required",
+        "version_increment": "mandatory",
+        "migration_guide": "required",
+        "breaking_change_documentation": "if not backward compatible"
+      },
+      "versioning_strategy": {
+        "additive_changes": "backward_compatible (minor version bump)",
+        "deprecations": "announce before removal, maintain for N versions",
+        "breaking_changes": "major version bump, migration path required"
+      },
+      "examples": [
+        "Adding new API endpoint",
+        "Changing request/response format",
+        "Modifying function signature",
+        "Adding required field to schema",
+        "Deprecating endpoint or parameter"
+      ],
+      "notes": "Contracts change slower than implementations"
+    },
+
+    "C4_structural": {
+      "name": "Structural Change",
+      "definition": "Modification to architectural boundaries or dependencies",
+      "characteristics": {
+        "architectural_impact": "high",
+        "affects_system_organization": true,
+        "changes_r_groups_or_dependencies": true
+      },
+      "rules": [
+        "Architectural invariants SHALL be revalidated (D1-D5)",
+        "Dependency direction SHALL be preserved (D2)",
+        "Justification SHALL be recorded"
+      ],
+      "approval_requirements": {
+        "code_review": "required",
+        "architecture_review": "required",
+        "multi_person_approval": "required",
+        "dependency_graph_validation": "required",
+        "justification_documentation": "mandatory"
+      },
+      "forbidden_without_approval": [
+        "Creating new R-group",
+        "Moving code between R-groups",
+        "Reversing dependency direction",
+        "Introducing circular dependencies",
+        "Creating runtime boundary violations"
+      ],
+      "examples": [
+        "Splitting R2 application layer into multiple services",
+        "Moving domain logic from R4 to R1",
+        "Introducing new architectural layer",
+        "Changing dependency injection strategy"
+      ],
+      "frequency": "rare",
+      "notes": "Structural change is rare and deliberate"
+    },
+
+    "C5_data_evolution": {
+      "name": "Data Evolution Change",
+      "definition": "Schema migrations, data model changes, persistence format modifications",
+      "characteristics": {
+        "affects_persistent_data": true,
+        "risk_level": "highest",
+        "reversibility": "complex"
+      },
+      "rules": [
+        "All schema changes SHALL be versioned and reversible",
+        "Data migrations SHALL be tested against production-scale data",
+        "No data loss without explicit approval",
+        "Rollback strategy SHALL be defined before deployment"
+      ],
+      "approval_requirements": {
+        "code_review": "required",
+        "architecture_review": "required",
+        "data_team_approval": "required",
+        "staging_validation": "required",
+        "rollback_plan": "documented and tested",
+        "backup_verification": "required"
+      },
+      "migration_requirements": {
+        "version_tracking": "mandatory",
+        "forward_migration": "required",
+        "backward_migration": "required (rollback)",
+        "data_validation": "before and after migration",
+        "production_scale_testing": "required"
+      },
+      "examples": [
+        "Adding column to database table",
+        "Changing column type or constraints",
+        "Creating new index",
+        "Splitting table",
+        "Migrating to new data store",
+        "Changing serialization format"
+      ],
+      "notes": "Data changes are highest-risk. They compound over time and cannot be easily undone."
+    }
+  },
+
+  "change_composition_rules": {
+    "single_classification": "A change MAY NOT span multiple classifications",
+    "ambiguity_resolution": "If uncertain, classify as the higher-risk category",
+    "decomposition": "Mixed changes SHALL be decomposed into separate commits",
+    "atomic_commits": "Each commit should be independently reviewable and revertible"
+  },
+
+  "approval_matrix": {
+    "C1": {
+      "required_approvals": 1,
+      "required_roles": ["developer"],
+      "automated_checks": ["tests", "linting"]
+    },
+    "C2": {
+      "required_approvals": 1,
+      "required_roles": ["developer"],
+      "automated_checks": ["tests", "behavioral_tests", "integration_tests"]
+    },
+    "C3": {
+      "required_approvals": 2,
+      "required_roles": ["developer", "architect"],
+      "automated_checks": ["tests", "version_validation", "migration_tests"]
+    },
+    "C4": {
+      "required_approvals": 2,
+      "required_roles": ["architect", "tech_lead"],
+      "automated_checks": ["dependency_graph_validation", "architectural_tests"]
+    },
+    "C5": {
+      "required_approvals": 3,
+      "required_roles": ["developer", "architect", "data_engineer"],
+      "automated_checks": ["migration_tests", "rollback_tests", "data_validation"],
+      "manual_checks": ["staging_validation", "backup_verification"]
+    }
+  },
+
+  "ai_classification_rules": {
+    "mandatory_declaration": "AI-generated changes SHALL declare classification in commit message",
+    "classification_format": "[C1|C2|C3|C4|C5]: <description>",
+    "rationale_required": "Include rationale for classification choice",
+    "conservative_bias": "When ambiguous, choose higher-risk classification",
+    "halt_on_ambiguity": "AI SHALL halt if classification is unclear and request human guidance",
+    "forbidden_actions": [
+      "Combining multiple change types in one modification",
+      "Bypassing approval requirements",
+      "Reclassifying changes to avoid review"
+    ]
+  },
+
+  "commit_message_templates": {
+    "C1": "[C1] Refactor user validation logic\n\nInternal implementation change only. No observable behavior change.\nNo interface or schema modifications.",
+    "C2": "[C2] Strengthen email validation rules\n\nRejects emails without TLD. Behavior change but interface unchanged.\nError kinds remain the same.",
+    "C3": "[C3] Add optional 'timezone' field to User API\n\nBackward compatible addition. Migration guide: clients can ignore new field.\nVersion bump: v1.2.0 → v1.3.0",
+    "C4": "[C4] Move authentication logic from R4 to R2\n\nStructural change to align with architectural invariants.\nDependency validation passed. Justification: auth is application concern, not infrastructure.",
+    "C5": "[C5] Add 'last_login' timestamp column to users table\n\nSchema migration #47. Tested on 10M row staging database.\nRollback script validated. No data loss. Deployment window: 2AM-4AM UTC."
+  },
+
+  "review_checklist": [
+    {
+      "step": 1,
+      "question": "What is the change classification (C1-C5)?",
+      "action": "Verify classification matches actual changes"
+    },
+    {
+      "step": 2,
+      "question": "Are all required approvals obtained?",
+      "action": "Check approval matrix for this classification"
+    },
+    {
+      "step": 3,
+      "question": "Do architectural invariants still hold?",
+      "action": "Validate D1-D5 compliance"
+    },
+    {
+      "step": 4,
+      "question": "Are operational constraints maintained?",
+      "action": "Validate O1-O7 compliance"
+    },
+    {
+      "step": 5,
+      "question": "Is error handling compliant?",
+      "action": "Validate against error system spec"
+    },
+    {
+      "step": 6,
+      "question": "Is the change atomic and revertible?",
+      "action": "Verify single classification, no mixing"
+    }
+  ],
+
+  "architectural_invariants": [
+    "No change may violate dimensional constraints (D1-D5)",
+    "No change may violate operational constraints (O1-O7)",
+    "No change may violate error system constraints",
+    "Change governance rules apply recursively to themselves"
+  ],
+
+  "success_criteria": {
+    "traceability": "All changes are traceable to intent",
+    "risk_proportionality": "Risk is proportional to approval overhead",
+    "predictability": "System evolution remains predictable",
+    "auditability": "AI-generated changes are auditable"
+  },
+
+  "notes": "If you cannot explain why a change happened, governance failed."
+}

@@ -1,0 +1,40 @@
+{
+  "name": "create-living-architecture",
+  "version": "1.1.0",
+  "description": "Scaffold a Living Architecture project with pluggable R0-R5 layers",
+  "main": "index.js",
+  "bin": {
+    "create-living-architecture": "index.js"
+  },
+  "files": [
+    "index.js",
+    "template/"
+  ],
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "architecture",
+    "code-organization",
+    "ai-coding",
+    "clean-architecture",
+    "git-hooks",
+    "scaffolding",
+    "gravitational-design",
+    "r0-r5",
+    "pluggable-layers"
+  ],
+  "author": "Demos Ra",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/demos-ra/living-architecture.git"
+  },
+  "bugs": {
+    "url": "https://github.com/demos-ra/living-architecture/issues"
+  },
+  "homepage": "https://github.com/demos-ra/living-architecture#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

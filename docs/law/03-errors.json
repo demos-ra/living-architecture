@@ -1,0 +1,234 @@
+{
+  "version": "1.0.0",
+  "specification": "../specs/03-errors.md",
+  "enforcement_mode": "blocking",
+  
+  "canonical_error_structure": {
+    "required_fields": [
+      {
+        "field": "kind",
+        "type": "string",
+        "source": "global_error_registry",
+        "description": "Class of failure - must match registry entry"
+      },
+      {
+        "field": "scope",
+        "type": "enum",
+        "allowed_values": ["USER", "SYSTEM", "DEPENDENCY"],
+        "description": "Affected responsibility boundary"
+      },
+      {
+        "field": "cause",
+        "type": "string",
+        "description": "Concise, factual description of why the error occurred"
+      },
+      {
+        "field": "location",
+        "type": "string",
+        "format": "R-group + logical component (e.g., 'R2:UserRegistration')",
+        "forbidden": "file paths, line numbers",
+        "description": "Logical origin within architecture"
+      },
+      {
+        "field": "resolution_hint",
+        "type": "string",
+        "description": "Fastest known corrective action"
+      }
+    ],
+    "additional_fields": "forbidden",
+    "notes": "Uniformity is mandatory to prevent semantic drift"
+  },
+
+  "global_error_registry": {
+    "VALIDATION_FAILED": {
+      "scope": "USER",
+      "description": "Input failed validation rules",
+      "typical_location": ["R3_interface", "R2_application"],
+      "resolution_hint_template": "Check {field_name}: {validation_rule}"
+    },
+    "AUTHENTICATION_FAILED": {
+      "scope": "USER",
+      "description": "Authentication credentials invalid or missing",
+      "typical_location": ["R3_interface"],
+      "resolution_hint_template": "Verify credentials or request new authentication token"
+    },
+    "AUTHORIZATION_FAILED": {
+      "scope": "USER",
+      "description": "User lacks required permissions",
+      "typical_location": ["R2_application"],
+      "resolution_hint_template": "Contact administrator for {required_permission} access"
+    },
+    "RESOURCE_NOT_FOUND": {
+      "scope": "USER",
+      "description": "Requested resource does not exist",
+      "typical_location": ["R2_application", "R4_infrastructure"],
+      "resolution_hint_template": "Verify {resource_type} identifier: {resource_id}"
+    },
+    "RESOURCE_CONFLICT": {
+      "scope": "USER",
+      "description": "Operation conflicts with current resource state",
+      "typical_location": ["R2_application"],
+      "resolution_hint_template": "Resource already exists or state prevents operation"
+    },
+    "RATE_LIMIT_EXCEEDED": {
+      "scope": "USER",
+      "description": "Request rate limit exceeded",
+      "typical_location": ["R3_interface", "R4_infrastructure"],
+      "resolution_hint_template": "Retry after {retry_after_seconds} seconds"
+    },
+    "INVALID_STATE": {
+      "scope": "SYSTEM",
+      "description": "System reached unexpected or invalid state",
+      "typical_location": ["R1_domain", "R2_application"],
+      "resolution_hint_template": "Contact support - invariant violation detected"
+    },
+    "CONFIGURATION_ERROR": {
+      "scope": "SYSTEM",
+      "description": "System configuration invalid or missing",
+      "typical_location": ["R4_infrastructure"],
+      "resolution_hint_template": "Check configuration for {config_key}"
+    },
+    "INTERNAL_ERROR": {
+      "scope": "SYSTEM",
+      "description": "Unexpected internal system error",
+      "typical_location": ["any"],
+      "resolution_hint_template": "Contact support with error ID: {error_id}"
+    },
+    "DEPENDENCY_UNAVAILABLE": {
+      "scope": "DEPENDENCY",
+      "description": "External dependency unreachable or down",
+      "typical_location": ["R4_infrastructure"],
+      "resolution_hint_template": "Retry operation - {dependency_name} temporarily unavailable"
+    },
+    "DEPENDENCY_TIMEOUT": {
+      "scope": "DEPENDENCY",
+      "description": "External dependency exceeded timeout",
+      "typical_location": ["R4_infrastructure"],
+      "resolution_hint_template": "Retry with exponential backoff - {dependency_name} slow to respond"
+    },
+    "DEPENDENCY_ERROR": {
+      "scope": "DEPENDENCY",
+      "description": "External dependency returned error",
+      "typical_location": ["R4_infrastructure"],
+      "resolution_hint_template": "Check {dependency_name} status or retry later"
+    },
+    "DATA_INTEGRITY_VIOLATION": {
+      "scope": "SYSTEM",
+      "description": "Data integrity constraint violated",
+      "typical_location": ["R4_infrastructure"],
+      "resolution_hint_template": "Contact support - data constraint violation: {constraint_name}"
+    },
+    "SCHEMA_MISMATCH": {
+      "scope": "SYSTEM",
+      "description": "Data schema version incompatible",
+      "typical_location": ["R4_infrastructure"],
+      "resolution_hint_template": "Migration required - schema version {expected} but found {actual}"
+    },
+    "QUOTA_EXCEEDED": {
+      "scope": "USER",
+      "description": "Resource quota exceeded",
+      "typical_location": ["R2_application"],
+      "resolution_hint_template": "Upgrade plan or contact support for {quota_type} increase"
+    }
+  },
+
+  "error_creation_rules": {
+    "point_of_detection": "Errors SHALL be created at the point of failure detection",
+    "explicit_only": "Errors SHALL be created explicitly, never implicitly",
+    "required_context": [
+      "Local context supplies cause and location",
+      "Global registry constrains kind and scope",
+      "Resolution hint must be actionable"
+    ]
+  },
+
+  "error_propagation_rules": {
+    "default_behavior": "unchanged",
+    "prohibited": [
+      "re-wrapping errors in new error types",
+      "reclassifying error kind during propagation",
+      "semantic mutation of error meaning"
+    ],
+    "allowed": [
+      "metadata enrichment (e.g., adding trace IDs)",
+      "boundary translation (changing format, not meaning)"
+    ],
+    "notes": "Propagation stability is critical for cross-layer reasoning"
+  },
+
+  "boundary_translation_rules": {
+    "permitted_at": "defined system boundaries only",
+    "preserve_semantics": "Canonical semantics SHALL be preserved",
+    "format_flexibility": "External representations MAY vary (HTTP status, gRPC code, etc.)",
+    "no_new_meaning": "Translation cannot introduce new semantic information",
+    "examples": {
+      "http_boundary": {
+        "VALIDATION_FAILED": "HTTP 400 Bad Request",
+        "AUTHENTICATION_FAILED": "HTTP 401 Unauthorized",
+        "AUTHORIZATION_FAILED": "HTTP 403 Forbidden",
+        "RESOURCE_NOT_FOUND": "HTTP 404 Not Found",
+        "RATE_LIMIT_EXCEEDED": "HTTP 429 Too Many Requests",
+        "INTERNAL_ERROR": "HTTP 500 Internal Server Error",
+        "DEPENDENCY_UNAVAILABLE": "HTTP 503 Service Unavailable"
+      }
+    }
+  },
+
+  "control_flow_constraint": {
+    "rule": "Errors SHALL NOT be used for normal control flow",
+    "rationale": "Expected states SHALL be modeled as data, not errors",
+    "violation_example": "Using exceptions to signal 'user not found' in optional lookup",
+    "compliant_example": "Return Option/Maybe type for optional lookups"
+  },
+
+  "observability_rules": {
+    "separation": "Error creation and error reporting are separate concerns",
+    "logging_location": "Errors SHALL be logged at impact boundaries",
+    "structured_logging": "Logging SHALL be structured (JSON recommended)",
+    "self_logging_forbidden": "Errors SHALL NOT self-log",
+    "notes": "Observability is O5 concern, not error concern"
+  },
+
+  "ai_generation_rules": {
+    "mandatory_actions": [
+      "Use canonical error structure",
+      "Select kind from global registry only",
+      "Populate all 5 required fields",
+      "Include actionable resolution_hint",
+      "Use appropriate scope (USER/SYSTEM/DEPENDENCY)"
+    ],
+    "forbidden_actions": [
+      "Inventing new error shapes",
+      "Bypassing the registry with custom error kinds",
+      "Encoding architectural decisions in errors",
+      "Using errors for control flow"
+    ],
+    "on_ambiguity": "If error kind unclear, use INTERNAL_ERROR and flag for human review"
+  },
+
+  "architectural_invariants": [
+    "Error semantics SHALL NOT leak business logic",
+    "Error handling SHALL NOT violate layer boundaries",
+    "Error definitions SHALL remain stable over time",
+    "Architectural decay via error handling is explicitly forbidden"
+  ],
+
+  "error_example_compliant": {
+    "kind": "VALIDATION_FAILED",
+    "scope": "USER",
+    "cause": "Email format invalid: missing @ symbol",
+    "location": "R2:UserRegistration",
+    "resolution_hint": "Provide valid email address in format: user@domain.com"
+  },
+
+  "error_example_violation": {
+    "description": "FORBIDDEN - custom error shape",
+    "example": {
+      "type": "CustomValidationError",
+      "message": "Bad email",
+      "code": 1001,
+      "timestamp": "2025-02-08T15:30:00Z"
+    },
+    "violation": "Does not use canonical structure, invented custom fields"
+  }
+}
