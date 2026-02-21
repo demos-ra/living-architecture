@@ -3,7 +3,7 @@
 
   "name": "create-living-architecture",
 
-  "version": "2.0.1",
+  "version": "2.0.2",
 
   "description": "Configuration-as-physics for software. Self-organizing layers, feature manifolds, and commit-time structural validation. No rules to follow—only gravitational fields.",
 
@@ -17,7 +17,19 @@
 
     "installer.js",
 
-    "src/",
+    "src/**/*.py",
+
+    "src/**/*.js",
+
+    "src/**/*.json",
+
+    "src/**/*.md",
+
+    "src/**/commit-msg",
+
+    "src/**/pre-commit",
+
+    "src/**/la-new.sh",
 
     ".living-arch/"
 
