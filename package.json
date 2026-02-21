@@ -1,23 +1,47 @@
+
 {
+
   "name": "create-living-architecture",
+
   "version": "2.0.0",
-  "description": "Gravitational code organization for AI-assisted development",
+
+  "description": "Configuration-as-physics for software. Self-organizing layers, feature manifolds, and commit-time structural validation. No rules to follow—only gravitational fields.",
+
   "bin": {
+
     "create-living-architecture": "./installer.js"
+
   },
+
   "files": [
+
     "installer.js",
+
     "src/",
+
     ".living-arch/"
+
   ],
-  "keywords": ["architecture", "ai-coding", "git-hooks", "code-organization"],
+
+  "keywords": ["architecture", "ai-coding", "git-hooks", "code-organization", "structural-validation"],
+
   "author": "Demos RA",
+
   "license": "MIT",
+
   "repository": {
+
     "type": "git",
+
     "url": "https://github.com/demos-ra/living-architecture"
+
   },
+
   "engines": {
+
     "node": ">=14.0.0"
+
   }
+
 }
+
