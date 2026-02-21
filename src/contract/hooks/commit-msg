@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# commit-msg - Living Architecture validation hook  
+# Receives commit message file as $1, validates format and F-tags
+#
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+if [ ! -f "src/app/validation-workflow.py" ]; then
+    exit 0
+fi
+
+# Pass message file path so workflow can read it
+export LA_COMMIT_MSG_FILE="$1"
+
+python3 src/app/validation-workflow.py
+exit $?

@@ -1,0 +1,97 @@
+living-architecture-v2.0/                        LAYER
+│
+├── package.json                                  R0
+├── README.md                                     docs
+├── CHANGELOG.md                                  docs
+├── INSTALL.md                                    docs
+├── STRUCTURE.txt                                 docs
+├── installer.js                                  R3  ← npx entry point
+├── test-la.py                                    dev  ← not shipped
+│
+├── .living-arch/
+│   ├── architecture.json                         meta
+│   └── SYSTEM.md                                 meta ← AI dev guide
+│
+└── src/
+    │
+    ├── config/                         R0 — Configuration (8 files)
+    │   ├── r-layers.json               # Layer definitions + dependency rules
+    │   ├── f-tags.json                 # F-tag format + completeness rules
+    │   ├── execution.json              # Runtime pattern definitions
+    │   ├── operations.json             # O1-O7 safety rules
+    │   ├── changes.json                # C1-C5 change classifications
+    │   ├── modules.json                # Module naming convention
+    │   ├── interfaces.json             # Interface contracts (manual)
+    │   └── SYSTEM.md                   # User AI guide (copied to projects)
+    │
+    ├── domain/                         R1 — Pure Logic (9 files)
+    │   ├── __init__.py                 # Package bootstrap (load-bearing)
+    │   ├── config_loader.py            # Reads all R0 configs
+    │   ├── la-output.py                # Output formatting (pure, no I/O)
+    │   ├── validate-r-layers.py        # Dependency direction + circular deps
+    │   ├── validate-f-tags.py          # F-tag completeness
+    │   ├── validate-execution.py       # Execution pattern checks
+    │   ├── validate-operations.py      # O-rule safety checks
+    │   ├── validate-changes.py         # C-code format
+    │   └── installer-logic.js          # Scaffold logic (pure functions)
+    │
+    ├── app/                            R2 — Orchestration (3 files)
+    │   ├── __init__.py                 # Package bootstrap (load-bearing)
+    │   ├── validation-workflow.py      # Coordinates all validators
+    │   └── installer-workflow.js       # Scaffold sequence orchestrator
+    │
+    ├── contract/                       R3 — Interfaces (4 files)
+    │   ├── hooks/
+    │   │   ├── pre-commit              # Git pre-commit hook
+    │   │   └── commit-msg              # Calls R2 validation workflow
+    │   └── cli/
+    │       ├── network-scan.py         # Project health CLI
+    │       └── la-new.sh               # Local installer (bash)
+    │
+    └── exec/                           R4 — I/O (5 files)
+        ├── __init__.py                 # Package bootstrap (load-bearing)
+        ├── git-io.py                   # Git subprocess operations
+        ├── file-io.py                  # File read + analysis
+        ├── installer-io.js             # fs I/O for scaffolding
+        └── module-loader.py            # Loads hyphenated .py modules
+
+TOTAL: 38 files (excluding test-la.py)
+  ROOT: 7 (5 docs + installer.js + package.json)
+  .living-arch: 2
+  R0 config: 8
+  R1 domain: 9
+  R2 app: 3
+  R3 contract: 4
+  R4 exec: 5
+
+═══════════════════════════════════════════════════════════
+MULTIDIMENSIONAL MAPPING
+═══════════════════════════════════════════════════════════
+
+7 DIMENSIONS × 3 STATES (Config → Validate → Apply):
+
+1. R-LAYERS     R0:r-layers.json      R1:validate-r-layers.py    R3:pre-commit
+2. F-TAGS       R0:f-tags.json        R1:validate-f-tags.py      R3:pre-commit
+3. EXECUTION    R0:execution.json     R1:validate-execution.py   R3:pre-commit
+4. OPERATIONS   R0:operations.json    R1:validate-operations.py  R3:pre-commit
+5. CHANGES      R0:changes.json       R1:validate-changes.py     R3:commit-msg
+6. MODULES      R0:modules.json       R1:config_loader.py        R3:network-scan.py
+7. INTERFACES   R0:interfaces.json    (manual documentation)     —
+
+All dimensions converge at R2:validation-workflow.py
+All R0 config loaded via R1:config_loader.py
+All output formatted via R1:la-output.py
+
+═══════════════════════════════════════════════════════════
+DEPENDENCY RULES (from r-layers.json)
+═══════════════════════════════════════════════════════════
+
+R0 Config     → depends on nothing
+R1 Domain     → depends on R0 only
+R2 Application → depends on R0, R1, R4
+R3 Contract   → depends on R0, R1, R2
+R4 Execution  → depends on R0 only
+
+Note: Package __init__.py files are bootstrap exceptions — they import
+module-loader (R4) to register hyphenated filenames. The validator
+skips __init__.py to avoid false positives on this known exception.

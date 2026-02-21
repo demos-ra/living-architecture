@@ -1,0 +1,4 @@
+#!/bin/bash
+# pre-commit - Living Architecture
+# Validation runs in commit-msg hook where message is available.
+exit 0

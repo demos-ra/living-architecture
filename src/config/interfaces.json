@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "enabled": false,
+  "description": "Interface contracts between R-layers (manual documentation)",
+  "convention": {
+    "format": "Document expected inputs/outputs between layers",
+    "examples": [
+      "R2 calls R1: login(username, password) -> Session",
+      "R3 calls R2: checkout() -> OrderConfirmation"
+    ]
+  },
+  "validation": {
+    "enforce_contracts": false,
+    "note": "Interfaces are documented, not enforced. Use for human/AI reference."
+  }
+}

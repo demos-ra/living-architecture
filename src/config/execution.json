@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "patterns": {
+    "io_ownership": "Single owner per I/O channel",
+    "state_machines": "Complete state transitions",
+    "coordination": "Single R2 orchestrator per path",
+    "flow_paths": "No circular dependencies"
+  }
+}

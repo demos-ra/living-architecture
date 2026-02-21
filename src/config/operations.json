@@ -1,0 +1,272 @@
+{
+  "version": "2.0.0",
+  "specification": "operational.json",
+  "enforcement_mode": "blocking",
+  
+  "operational_dimensions": {
+    "O1_access_control": {
+      "name": "Access Control & Abuse Prevention",
+      "scope": "all external access points",
+      "mandatory_checks": [
+        {
+          "check": "authentication_required",
+          "rule": "All external access SHALL be authenticated or explicitly marked public",
+          "enforcement_layer": "R3_contract"
+        },
+        {
+          "check": "authorization_enforcement",
+          "rule": "Authorization SHALL be enforced at Application layer (R2)",
+          "enforcement_layer": "R2_application"
+        },
+        {
+          "check": "no_business_logic_in_auth",
+          "rule": "Execution layer SHALL NOT encode business permission logic",
+          "violation": "Auth checks in controllers acceptable; auth rules are not"
+        }
+      ]
+    },
+
+    "O2_traffic_management": {
+      "name": "Traffic Management",
+      "scope": "all system boundaries",
+      "mandatory_properties": [
+        {
+          "property": "rate_limiting",
+          "requirement": "SHALL exist at system boundaries",
+          "identity_aware": true,
+          "supported_identities": ["user", "token", "ip", "api_key"],
+          "state_location": "R4_execution"
+        },
+        {
+          "property": "throttling",
+          "requirement": "SHALL prevent accidental DoS",
+          "notes": "Protects against AI-generated infinite loops"
+        },
+        {
+          "property": "quotas",
+          "requirement": "SHALL be configurable per identity type"
+        },
+        {
+          "property": "burst_control",
+          "requirement": "SHALL define maximum burst size"
+        }
+      ],
+      "code_pattern_example": {
+        "violation": "await fetch(externalAPI)",
+        "compliant": "await rateLimiter.wrap(() => fetch(externalAPI, {timeout: 5000}), {maxRetries: 3, identity: userId})"
+      }
+    },
+
+    "O3_reliability": {
+      "name": "Reliability & Fault Tolerance",
+      "scope": "all external calls and stateful operations",
+      "mandatory_properties": [
+        {
+          "property": "timeout",
+          "requirement": "All external calls SHALL define timeouts",
+          "type": "number",
+          "constraint": ">0 and <=30000",
+          "units": "milliseconds"
+        },
+        {
+          "property": "retry_policy",
+          "requirement": "Retry logic SHALL be bounded and explicit",
+          "constraints": {
+            "max_attempts": "<=5",
+            "backoff_type": ["exponential", "linear", "fixed"],
+            "max_backoff_ms": "<=60000"
+          }
+        },
+        {
+          "property": "circuit_breaker",
+          "requirement": "High-volume external dependencies SHOULD implement circuit breakers",
+          "parameters": {
+            "failure_threshold": "configurable",
+            "timeout": "configurable",
+            "reset_timeout": "configurable"
+          }
+        },
+        {
+          "property": "graceful_degradation",
+          "requirement": "Failure modes SHALL be predictable",
+          "notes": "Unhandled error is not an acceptable system state"
+        }
+      ]
+    },
+
+    "O4_performance": {
+      "name": "Performance & Resource Control",
+      "scope": "all resource-intensive operations",
+      "mandatory_constraints": [
+        {
+          "constraint": "resource_isolation",
+          "rule": "Resource-heavy operations SHALL be isolated",
+          "examples": ["batch processing", "large file operations", "complex computations"]
+        },
+        {
+          "constraint": "explicit_caching",
+          "rule": "Caching SHALL be explicit and invalidation-defined",
+          "forbidden": "implicit caching without invalidation strategy"
+        },
+        {
+          "constraint": "bounded_operations",
+          "rule": "No unbounded loops or recursive calls",
+          "enforcement": "All loops must have explicit termination condition",
+          "notes": "Performance bugs become availability bugs at scale"
+        },
+        {
+          "constraint": "concurrency_limits",
+          "rule": "Concurrent operations SHALL have explicit limits"
+        },
+        {
+          "constraint": "memory_budgets",
+          "rule": "Large allocations SHALL be bounded and justified"
+        }
+      ]
+    },
+
+    "O5_observability": {
+      "name": "Observability",
+      "scope": "all critical paths and error conditions",
+      "mandatory_requirements": [
+        {
+          "requirement": "structured_logging",
+          "rule": "All critical paths SHALL emit structured logs",
+          "format": "machine-parseable (JSON recommended)",
+          "minimum_fields": ["timestamp", "level", "message", "context"]
+        },
+        {
+          "requirement": "error_detectability",
+          "rule": "Errors SHALL be machine-detectable",
+          "implementation": "structured error objects, not string messages"
+        },
+        {
+          "requirement": "business_metrics",
+          "rule": "Metrics SHALL align with business events",
+          "examples": ["user_action_completed", "transaction_processed", "api_call_made"]
+        },
+        {
+          "requirement": "tracing",
+          "rule": "Distributed operations SHOULD include trace IDs",
+          "propagation": "across service boundaries"
+        }
+      ],
+      "notes": "If you cannot observe it, AI cannot safely optimize it"
+    },
+
+    "O6_configuration": {
+      "name": "Configuration & Environment",
+      "scope": "all environment-dependent behavior",
+      "mandatory_rules": [
+        {
+          "rule": "no_environment_logic_in_domain",
+          "constraint": "No environment-specific logic in R1 or R2",
+          "allowed_location": "R4_infrastructure only"
+        },
+        {
+          "rule": "no_hardcoded_secrets",
+          "constraint": "Secrets SHALL NOT be hard-coded",
+          "enforcement": "blocking",
+          "detection": "scan for patterns like API keys, passwords, tokens"
+        },
+        {
+          "rule": "external_configuration",
+          "constraint": "Configuration SHALL be externally injectable",
+          "methods": ["environment variables", "config files", "external config service"]
+        },
+        {
+          "rule": "feature_flags",
+          "recommendation": "Use feature flags for gradual rollouts",
+          "location": "R4_execution"
+        }
+      ],
+      "notes": "Environment coupling is a hidden dependency dimension"
+    },
+
+    "O7_data_safety": {
+      "name": "Data Safety & Lifecycle",
+      "scope": "all data operations",
+      "mandatory_requirements": [
+        {
+          "requirement": "input_validation",
+          "rule": "All external inputs SHALL be validated",
+          "location": "R3_interface or R2_application",
+          "forbidden": "trusting external input without validation"
+        },
+        {
+          "requirement": "schema_versioning",
+          "rule": "Schema changes SHALL be versioned",
+          "applies_to": ["database schemas", "API contracts", "message formats"]
+        },
+        {
+          "requirement": "intentional_deletion",
+          "rule": "Data deletion SHALL be intentional and auditable",
+          "forbidden": "cascading deletes without explicit approval"
+        },
+        {
+          "requirement": "backup_strategy",
+          "rule": "Critical data SHALL have backup and recovery plan",
+          "testing": "recovery procedures SHALL be tested"
+        },
+        {
+          "requirement": "retention_policy",
+          "rule": "Data retention SHALL be explicitly defined",
+          "compliance": "Consider regulatory requirements (GDPR, etc.)"
+        }
+      ],
+      "notes": "Data bugs are permanent bugs"
+    }
+  },
+
+  "cross_dimension_rules": [
+    "No operational concern may violate architectural invariants",
+    "Operational logic SHALL NOT leak into Domain logic (R1)",
+    "Execution (R4) MAY support operational enforcement only"
+  ],
+
+  "review_protocol": {
+    "for_each_change": [
+      {
+        "step": 1,
+        "action": "Identify affected operational dimensions"
+      },
+      {
+        "step": 2,
+        "action": "Verify architectural compliance (D1-D5)"
+      },
+      {
+        "step": 3,
+        "action": "Verify bounded behavior (no infinite loops, unbounded retries, etc.)"
+      },
+      {
+        "step": 4,
+        "action": "Verify failure handling (timeouts, circuit breakers, error propagation)"
+      },
+      {
+        "step": 5,
+        "action": "Halt on violation"
+      }
+    ],
+    "notes": "Most production outages are review failures, not code failures"
+  },
+
+  "ai_instructions": {
+    "before_external_calls": [
+      "Add timeout parameter",
+      "Wrap in rate limiter if user/client-triggered",
+      "Define retry policy with max attempts <=5",
+      "Add structured error handling"
+    ],
+    "before_data_operations": [
+      "Validate all inputs",
+      "Check schema version compatibility",
+      "Ensure deletion is explicit and logged"
+    ],
+    "before_resource_intensive_ops": [
+      "Define concurrency limits",
+      "Add execution timeout",
+      "Implement progress monitoring"
+    ],
+    "on_violation": "HALT and request architectural review"
+  }
+}

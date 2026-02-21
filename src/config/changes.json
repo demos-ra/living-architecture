@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "codes": {
+    "C1": "Internal - refactor, no external change",
+    "C2": "Feature - new functionality",
+    "C3": "Contract - API/interface change",
+    "C4": "Structure - R-layer reorganization",
+    "C5": "Migration - data/dependency update"
+  },
+  "format": "C[1-5]"
+}

@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "enabled": true,
+  "convention": {
+    "format": "{module}-{component}.ext",
+    "description": "Group related code across R-layers with module prefix",
+    "examples": [
+      "auth-login.py",
+      "auth-session.py",
+      "payment-process.py",
+      "cart-add.py"
+    ]
+  },
+  "rules": {
+    "enforce_boundaries": false,
+    "warn_cross_module": true,
+    "display_in_output": true
+  }
+}

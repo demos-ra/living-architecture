@@ -1,0 +1,111 @@
+{
+  "version": "2.0.0",
+  "enforcement_mode": "blocking",
+  "layers": {
+    "R0": {
+      "name": "Config",
+      "directory": "config",
+      "required": false
+    },
+    "R1": {
+      "name": "Domain",
+      "directory": "domain",
+      "required": false
+    },
+    "R2": {
+      "name": "Application",
+      "directory": "app",
+      "required": false
+    },
+    "R3": {
+      "name": "Contract",
+      "directory": "contract",
+      "required": true
+    },
+    "R4": {
+      "name": "Execution",
+      "directory": "exec",
+      "required": true
+    }
+  },
+  "dependencies": {
+    "R0": {
+      "allowed": [],
+      "forbidden": ["R1", "R2", "R3", "R4"]
+    },
+    "R1": {
+      "allowed": ["R0"],
+      "forbidden": ["R2", "R3", "R4"]
+    },
+    "R2": {
+      "allowed": ["R0", "R1", "R4"],
+      "forbidden": ["R3"]
+    },
+    "R3": {
+      "allowed": ["R0", "R1", "R2"],
+      "forbidden": ["R4"]
+    },
+    "R4": {
+      "allowed": ["R0"],
+      "forbidden": ["R1", "R2", "R3"]
+    }
+  },
+  "skip_matrix": {
+    "R0": {
+      "add_when": "configuration_concerns > 5",
+      "skip_if": "all config fits in .env"
+    },
+    "R1": {
+      "add_when": "business_rules > 10",
+      "skip_if": "simple CRUD app"
+    },
+    "R2": {
+      "add_when": "workflows > 3 or state_machines",
+      "skip_if": "direct handlers work"
+    },
+    "R3": {
+      "add_when": "always",
+      "skip_if": "never"
+    },
+    "R4": {
+      "add_when": "always",
+      "skip_if": "never"
+    }
+  },
+  "evolution_phases": [
+    {
+      "phase": "tiny",
+      "active": ["R3", "R4"]
+    },
+    {
+      "phase": "small",
+      "active": ["R1", "R2", "R3", "R4"]
+    },
+    {
+      "phase": "growing",
+      "active": ["R0", "R1", "R2", "R3", "R4"]
+    },
+    {
+      "phase": "enterprise",
+      "active": ["R0", "R1", "R2", "R3", "R4"]
+    }
+  ],
+  "commit_format": {
+    "pattern": "^\\[F-[a-z][a-z0-9-]*/R[0-4]/C[1-5]\\]",
+    "layer_codes": {
+      "R0": "Config",
+      "R1": "Domain",
+      "R2": "Application",
+      "R3": "Contract",
+      "R4": "Execution"
+    },
+    "classification_codes": {
+      "C1": "Internal",
+      "C2": "Feature",
+      "C3": "Contract",
+      "C4": "Structure",
+      "C5": "Migration"
+    },
+    "feature_tag": "required, F-kebab-case, groups commits into vertical slices"
+  }
+}
