@@ -1,0 +1,34 @@
+living-architecture
+Copyright (C) 2026 Demos Ra <demos_ra@hotmail.com>
+
+Created by Demos Ra: canon (.canon.mtsv), its templates (.templates.mtsv),
+the spec format (.spec.mtsv) and the reference implementation (generate.py,
+check.py).
+
+Built on MTSV, Multi-Sheet Tab-Separated Values, also created by Demos Ra:
+  Specification   https://github.com/demos-ra/mtsv-spec
+  Internet-Draft  https://datatracker.ietf.org/doc/draft-demosra-mtsv/
+  Library         https://github.com/demos-ra/mtsv
+
+License
+  GNU Affero General Public License, version 3 only (LICENSE), with the
+  living-architecture Generated Output Exception, version 1.0 (EXCEPTION.md).
+  The Exception governs generate.py and .templates.mtsv.
+  SPDX-License-Identifier: AGPL-3.0-only WITH AdditionRef-LA-generated-output-exception-1.0
+
+Additional terms under section 7 of the GNU Affero General Public License
+  b) This NOTICE and the author attributions in it must be preserved.
+  c) Modified versions must be marked as different from the original version.
+  d) The name of Demos Ra may not be used for publicity without permission.
+  e) No rights are granted under trademark law for the names
+     living-architecture and Living Architecture.
+
+Commercial licenses and support contracts are available from Demos Ra:
+demos_ra@hotmail.com
+
+The templates take each language's kind names from its own grammar and its
+layout from its own serializer: CSS Syntax Module Level 3 and CSSOM (W3C),
+RFC 8259 and ECMA-262 (JSON), Prisma's datamodel grammar and formatter
+(prisma-engines), and TypeScript's parser and printer (typescript-go). Module
+kinds follow the Next.js file conventions. No code from those projects is
+included.

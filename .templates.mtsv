@@ -1,0 +1,1644 @@
+1-modules
+notation	kind	template	encoding
+—	{{name}} · .json	—	—
+—	{{name}} · .prisma	—	—
+—	{{name}} · .css	—	—
+—	{{name}} · .ts	—	—
+—	{{name}} · .tsx	—	—
+—	{{name}} · .mtsv	—	—
+—	layout · .tsx	—	—
+—	template · .tsx	—	—
+—	error · .tsx	—	—
+—	loading · .tsx	—	—
+—	not-found · .tsx	—	—
+—	page · .tsx	—	—
+—	default · .tsx	—	—
+—	forbidden · .tsx	—	—
+—	unauthorized · .tsx	—	—
+—	route · .ts	—	—
+—	global-error · .tsx	—	—
+—	global-not-found · .tsx	—	—
+—	instrumentation · .ts	—	—
+—	instrumentation-client · .ts	—	—
+—	proxy · .ts	—	—
+—	mdx-components · .tsx	—	—
+—	favicon · .ico	—	—
+—	icon · .ico	—	—
+—	icon · .jpg	—	—
+—	icon · .jpeg	—	—
+—	icon · .png	—	—
+—	icon · .svg	—	—
+—	icon · .ts	—	—
+—	icon · .tsx	—	—
+—	icon{{name}} · .ico	—	—
+—	icon{{name}} · .jpg	—	—
+—	icon{{name}} · .jpeg	—	—
+—	icon{{name}} · .png	—	—
+—	icon{{name}} · .svg	—	—
+—	apple-icon · .jpg	—	—
+—	apple-icon · .jpeg	—	—
+—	apple-icon · .png	—	—
+—	apple-icon · .ts	—	—
+—	apple-icon · .tsx	—	—
+—	apple-icon{{name}} · .jpg	—	—
+—	apple-icon{{name}} · .jpeg	—	—
+—	apple-icon{{name}} · .png	—	—
+—	opengraph-image · .jpg	—	—
+—	opengraph-image · .jpeg	—	—
+—	opengraph-image · .png	—	—
+—	opengraph-image · .gif	—	—
+—	opengraph-image · .ts	—	—
+—	opengraph-image · .tsx	—	—
+—	opengraph-image.alt · .txt	—	—
+—	twitter-image · .jpg	—	—
+—	twitter-image · .jpeg	—	—
+—	twitter-image · .png	—	—
+—	twitter-image · .gif	—	—
+—	twitter-image · .ts	—	—
+—	twitter-image · .tsx	—	—
+—	twitter-image.alt · .txt	—	—
+—	manifest · .json	—	—
+—	manifest · .webmanifest	—	—
+—	manifest · .ts	—	—
+—	robots · .txt	—	—
+—	robots · .ts	—	—
+—	sitemap · .xml	—	—
+—	sitemap · .ts	—	—
+2-files
+notation	kind	template	encoding
+—	.mtsv	—	—
+—	.ico	—	—
+—	.jpg	—	—
+—	.jpeg	—	—
+—	.png	—	—
+—	.svg	—	—
+—	.gif	—	—
+—	.txt	—	—
+—	.webmanifest	—	—
+—	.xml	—	—
+css	.css	{{stylesheet}}\n	UTF-8
+json	.json	{{JSON-text}}\n	UTF-8
+prisma	.prisma	{{schema}}\n	UTF-8
+typescript	.ts	{{SourceFile}}\n	UTF-8
+typescriptreact	.tsx	{{SourceFile}}\n	UTF-8
+3-bodies
+notation	kind	template	encoding
+css	stylesheet	{{body}}	—
+css	block's contents	{{body}}	—
+css	list of declarations	{{body}}	—
+json	JSON-text	{{value}}	—
+prisma	schema	{{body}}	—
+prisma	model_contents	{{body}}	—
+prisma	config_contents	{{body}}	—
+prisma	enum_contents	{{body}}	—
+typescript	SourceFile	{{Statements}}	—
+typescript	Block	\\{{{Statements}}\\}	—
+typescript	ModuleBlock	\\{{{Statements}}\\}	—
+typescript	Statements	{{Statements}}	—
+typescriptreact	SourceFile	{{Statements}}	—
+typescriptreact	Block	\\{{{Statements}}\\}	—
+typescriptreact	ModuleBlock	\\{{{Statements}}\\}	—
+typescriptreact	Statements	{{Statements}}	—
+4-statements
+notation	kind	template	encoding
+css	qualified rule	{{prelude}} \\{{{block}}\\}	—
+css	at-rule · {}-block	{{name}}{{prelude}} \\{{{block}}\\}	—
+css	at-rule · semicolon-token	{{name}}{{prelude}};	—
+css	declaration	{{name}}: {{value}}{{important}};	—
+css	list of declarations	{{declarations}}	—
+json	value	{{value}}	—
+prisma	model_declaration	{{keyword}} {{identifier}} \\{\n{{model_contents}}\\}	—
+prisma	enum_declaration	enum {{identifier}} \\{\n{{enum_contents}}\\}	—
+prisma	config_block	{{keyword}} {{identifier}} \\{\n{{config_contents}}\\}	—
+prisma	type_alias	type {{identifier}} = {{base_type}}{{field_attribute}}	—
+prisma	field_declaration	{{identifier}}{{field_type}}{{field_attribute}}	—
+prisma	block_attribute	@@{{path}}{{arguments_list}}	—
+prisma	key_value	{{identifier}} ={{expression}}	—
+prisma	enum_value_declaration	{{identifier}}{{field_attribute}}	—
+typescript	Block	{{Block}}	—
+typescript	EmptyStatement	;	—
+typescript	VariableStatement	{{modifiers}}{{DeclarationList}};	—
+typescript	ExpressionStatement	{{Expression}};	—
+typescript	IfStatement	if ({{Expression}}) {{ThenStatement}}	—
+typescript	IfStatement · ElseStatement	if ({{Expression}}) {{ThenStatement}}\nelse {{ElseStatement}}	—
+typescript	DoStatement	do {{Statement}} while ({{Expression}});	—
+typescript	WhileStatement	while ({{Expression}}) {{Statement}}	—
+typescript	ForStatement	for ({{Initializer}};{{Condition}};{{Incrementor}}) {{Statement}}	—
+typescript	ForInStatement	for ({{Initializer}} in {{Expression}}) {{Statement}}	—
+typescript	ForOfStatement	for {{AwaitModifier}}({{Initializer}} of {{Expression}}) {{Statement}}	—
+typescript	ContinueStatement	continue{{Label}};	—
+typescript	BreakStatement	break{{Label}};	—
+typescript	ReturnStatement	return{{Expression}};	—
+typescript	WithStatement	with ({{Expression}}) {{Statement}}	—
+typescript	SwitchStatement	switch ({{Expression}}) {{CaseBlock}}	—
+typescript	LabeledStatement	{{Label}}: {{Statement}}	—
+typescript	ThrowStatement	throw {{Expression}};	—
+typescript	TryStatement	try {{TryBlock}}\n{{CatchClause}}	—
+typescript	TryStatement · FinallyBlock	try {{TryBlock}}{{CatchClause}}\nfinally {{FinallyBlock}}	—
+typescript	DebuggerStatement	debugger;	—
+typescript	FunctionDeclaration · Body	{{modifiers}}function{{AsteriskToken}} {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescript	FunctionDeclaration · SemicolonToken	{{modifiers}}function{{AsteriskToken}} {{name}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	ClassDeclaration	{{modifiers}}class{{name}}{{TypeParameters}}{{HeritageClauses}} \\{{{Members}}\\}	—
+typescript	InterfaceDeclaration	{{modifiers}}interface {{name}}{{TypeParameters}}{{HeritageClauses}} \\{{{Members}}\\}	—
+typescript	TypeAliasDeclaration	{{modifiers}}type {{name}}{{TypeParameters}} = {{Type}};	—
+typescript	EnumDeclaration	{{modifiers}}enum {{name}} \\{{{Members}}\\}	—
+typescript	ModuleDeclaration · ModuleBlock	{{modifiers}}{{Keyword}}{{name}}{{Attributes}} {{Body}}	—
+typescript	ModuleDeclaration · SemicolonToken	{{modifiers}}{{Keyword}}{{name}}{{Attributes}};	—
+typescript	ImportEqualsDeclaration	{{modifiers}}import {{IsTypeOnly}}{{name}} = {{ModuleReference}};	—
+typescript	ImportDeclaration	{{modifiers}}import {{ImportClause}}{{ModuleSpecifier}}{{Attributes}};	—
+typescript	ExportAssignment	export {{IsExportEquals}} {{Expression}};	—
+typescript	ExportDeclaration · ExportClause	{{modifiers}}export {{IsTypeOnly}}{{ExportClause}}{{ModuleSpecifier}}{{Attributes}};	—
+typescript	ExportDeclaration · AsteriskToken	{{modifiers}}export {{IsTypeOnly}}*{{ModuleSpecifier}}{{Attributes}};	—
+typescript	NamespaceExportDeclaration	export as namespace {{name}};	—
+typescriptreact	Block	{{Block}}	—
+typescriptreact	EmptyStatement	;	—
+typescriptreact	VariableStatement	{{modifiers}}{{DeclarationList}};	—
+typescriptreact	ExpressionStatement	{{Expression}};	—
+typescriptreact	IfStatement	if ({{Expression}}) {{ThenStatement}}	—
+typescriptreact	IfStatement · ElseStatement	if ({{Expression}}) {{ThenStatement}}\nelse {{ElseStatement}}	—
+typescriptreact	DoStatement	do {{Statement}} while ({{Expression}});	—
+typescriptreact	WhileStatement	while ({{Expression}}) {{Statement}}	—
+typescriptreact	ForStatement	for ({{Initializer}};{{Condition}};{{Incrementor}}) {{Statement}}	—
+typescriptreact	ForInStatement	for ({{Initializer}} in {{Expression}}) {{Statement}}	—
+typescriptreact	ForOfStatement	for {{AwaitModifier}}({{Initializer}} of {{Expression}}) {{Statement}}	—
+typescriptreact	ContinueStatement	continue{{Label}};	—
+typescriptreact	BreakStatement	break{{Label}};	—
+typescriptreact	ReturnStatement	return{{Expression}};	—
+typescriptreact	WithStatement	with ({{Expression}}) {{Statement}}	—
+typescriptreact	SwitchStatement	switch ({{Expression}}) {{CaseBlock}}	—
+typescriptreact	LabeledStatement	{{Label}}: {{Statement}}	—
+typescriptreact	ThrowStatement	throw {{Expression}};	—
+typescriptreact	TryStatement	try {{TryBlock}}\n{{CatchClause}}	—
+typescriptreact	TryStatement · FinallyBlock	try {{TryBlock}}{{CatchClause}}\nfinally {{FinallyBlock}}	—
+typescriptreact	DebuggerStatement	debugger;	—
+typescriptreact	FunctionDeclaration · Body	{{modifiers}}function{{AsteriskToken}} {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescriptreact	FunctionDeclaration · SemicolonToken	{{modifiers}}function{{AsteriskToken}} {{name}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	ClassDeclaration	{{modifiers}}class{{name}}{{TypeParameters}}{{HeritageClauses}} \\{{{Members}}\\}	—
+typescriptreact	InterfaceDeclaration	{{modifiers}}interface {{name}}{{TypeParameters}}{{HeritageClauses}} \\{{{Members}}\\}	—
+typescriptreact	TypeAliasDeclaration	{{modifiers}}type {{name}}{{TypeParameters}} = {{Type}};	—
+typescriptreact	EnumDeclaration	{{modifiers}}enum {{name}} \\{{{Members}}\\}	—
+typescriptreact	ModuleDeclaration · ModuleBlock	{{modifiers}}{{Keyword}}{{name}}{{Attributes}} {{Body}}	—
+typescriptreact	ModuleDeclaration · SemicolonToken	{{modifiers}}{{Keyword}}{{name}}{{Attributes}};	—
+typescriptreact	ImportEqualsDeclaration	{{modifiers}}import {{IsTypeOnly}}{{name}} = {{ModuleReference}};	—
+typescriptreact	ImportDeclaration	{{modifiers}}import {{ImportClause}}{{ModuleSpecifier}}{{Attributes}};	—
+typescriptreact	ExportAssignment	export {{IsExportEquals}} {{Expression}};	—
+typescriptreact	ExportDeclaration · ExportClause	{{modifiers}}export {{IsTypeOnly}}{{ExportClause}}{{ModuleSpecifier}}{{Attributes}};	—
+typescriptreact	ExportDeclaration · AsteriskToken	{{modifiers}}export {{IsTypeOnly}}*{{ModuleSpecifier}}{{Attributes}};	—
+typescriptreact	NamespaceExportDeclaration	export as namespace {{name}};	—
+5-expressions
+notation	kind	template	encoding
+css	function	{{name}}({{value}})	—
+css	[]-block	[{{value}}]	—
+css	()-block	({{value}})	—
+css	{}-block	\\{{{value}}\\}	—
+css	important	!important	—
+css	ident-token	{{value}}	—
+css	at-keyword-token	@{{value}}	—
+css	hash-token	#{{value}}	—
+css	string-token	"{{value}}"	—
+css	url-token	url({{value}})	—
+css	delim-token	{{value}}	—
+css	number-token	{{value}}	—
+css	percentage-token	{{value}}%	—
+css	dimension-token	{{value}}{{unit}}	—
+css	unicode-range-token	{{value}}	—
+css	whitespace-token	{{value}}	—
+css	CDO-token	<!--	—
+css	CDC-token	-->	—
+css	colon-token	:	—
+css	semicolon-token	;	—
+css	comma-token	,	—
+json	false	false	—
+json	null	null	—
+json	true	true	—
+json	object	\\{{{member}}\\}	—
+json	member	{{string}}:{{value}}	—
+json	array	[{{value}}]	—
+json	number	{{minus}}{{int}}{{frac}}{{exp}}	—
+json	string	"{{char}}"	—
+prisma	MODEL_KEYWORD	model	—
+prisma	TYPE_KEYWORD	type	—
+prisma	VIEW_KEYWORD	view	—
+prisma	DATASOURCE_KEYWORD	datasource	—
+prisma	GENERATOR_KEYWORD	generator	—
+prisma	list_type	{{base_type}}[]	—
+prisma	optional_type	{{base_type}}?	—
+prisma	unsupported_optional_list_type	{{base_type}}[]?	—
+prisma	unsupported_type	Unsupported({{string_literal}})	—
+prisma	field_attribute	@{{path}}{{arguments_list}}	—
+prisma	arguments_list	({{argument}})	—
+prisma	named_argument	{{identifier}}: {{expression}}	—
+prisma	empty_argument	{{identifier}}:\s	—
+prisma	function_call	{{path}}{{arguments_list}}	—
+prisma	array_expression	[{{expression}}]	—
+prisma	object_expression	\\{ {{object_member}} \\}	—
+prisma	object_member	{{identifier}}: {{expression}}	—
+prisma	numeric_literal	{{numeric_literal}}	—
+prisma	string_literal	"{{string_content}}"	—
+prisma	path	{{path}}	—
+prisma	identifier	{{identifier}}	—
+typescript	Identifier	{{Text}}	—
+typescript	PrivateIdentifier	{{Text}}	—
+typescript	QualifiedName	{{Left}}.{{Right}}	—
+typescript	ComputedPropertyName	[{{Expression}}]	—
+typescript	StringLiteral	{{Text}}	—
+typescript	NumericLiteral	{{Text}}	—
+typescript	BigIntLiteral	{{Text}}	—
+typescript	RegularExpressionLiteral	{{Text}}	—
+typescript	NoSubstitutionTemplateLiteral	{{Text}}	—
+typescript	TemplateHead	{{Text}}	—
+typescript	TemplateMiddle	{{Text}}	—
+typescript	TemplateTail	{{Text}}	—
+typescript	NullLiteral	null	—
+typescript	TrueLiteral	true	—
+typescript	FalseLiteral	false	—
+typescript	ThisExpression	this	—
+typescript	SuperExpression	super	—
+typescript	ImportExpression	import	—
+typescript	TypeParameter	{{modifiers}}{{name}}{{Constraint}}{{DefaultType}}	—
+typescript	MappedTypeParameter	{{name}} in {{Constraint}}	—
+typescript	InferTypeParameter	{{name}}{{Constraint}}	—
+typescript	Parameter	{{modifiers}}{{DotDotDotToken}}{{name}}{{QuestionToken}}{{Type}}{{Initializer}}	—
+typescript	Decorator	@{{Expression}}	—
+typescript	PropertySignature	{{modifiers}}{{name}}{{PostfixToken}}{{Type}};	—
+typescript	PropertyDeclaration	{{modifiers}}{{name}}{{PostfixToken}}{{Type}}{{Initializer}};	—
+typescript	MethodSignature	{{modifiers}}{{name}}{{PostfixToken}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	MethodDeclaration · Body	{{modifiers}}{{AsteriskToken}}{{name}}{{PostfixToken}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescript	MethodDeclaration · SemicolonToken	{{modifiers}}{{AsteriskToken}}{{name}}{{PostfixToken}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	ClassStaticBlockDeclaration	static {{Body}}	—
+typescript	Constructor · Body	{{modifiers}}constructor{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescript	Constructor · SemicolonToken	{{modifiers}}constructor{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	GetAccessor · Body	{{modifiers}}get {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescript	GetAccessor · SemicolonToken	{{modifiers}}get {{name}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	SetAccessor · Body	{{modifiers}}set {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescript	SetAccessor · SemicolonToken	{{modifiers}}set {{name}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	CallSignature	{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	ConstructSignature	new {{TypeParameters}}({{Parameters}}){{Type}};	—
+typescript	IndexSignature	{{modifiers}}[{{Parameters}}]{{Type}};	—
+typescript	SemicolonClassElement	;	—
+typescript	PropertyAssignment	{{name}}: {{Initializer}}	—
+typescript	ShorthandPropertyAssignment	{{name}}{{ObjectAssignmentInitializer}}	—
+typescript	SpreadAssignment	...{{Expression}}	—
+typescript	EnumMember	{{name}}{{Initializer}}	—
+typescript	TypePredicate	{{AssertsModifier}}{{ParameterName}}{{Type}}	—
+typescript	TypeReference	{{TypeName}}{{TypeArguments}}	—
+typescript	FunctionType	{{TypeParameters}}({{Parameters}}) => {{Type}}	—
+typescript	ConstructorType	{{modifiers}}new {{TypeParameters}}({{Parameters}}) => {{Type}}	—
+typescript	TypeQuery	typeof {{ExprName}}{{TypeArguments}}	—
+typescript	TypeLiteral	\\{{{Members}}\\}	—
+typescript	ArrayType	{{ElementType}}[]	—
+typescript	TupleType	[{{Elements}}]	—
+typescript	OptionalType	{{Type}}?	—
+typescript	RestType	...{{Type}}	—
+typescript	UnionType	{{Types}}	—
+typescript	IntersectionType	{{Types}}	—
+typescript	ConditionalType	{{CheckType}} extends {{ExtendsType}} ? {{TrueType}} : {{FalseType}}	—
+typescript	InferType	infer {{TypeParameter}}	—
+typescript	ParenthesizedType	({{Type}})	—
+typescript	ThisType	this	—
+typescript	TypeOperator	{{Operator}} {{Type}}	—
+typescript	IndexedAccessType	{{ObjectType}}[{{IndexType}}]	—
+typescript	MappedType	\\{ {{ReadonlyToken}}[{{TypeParameter}}{{NameType}}]{{QuestionToken}}{{Type}};{{Members}} \\}	—
+typescript	LiteralType	{{Literal}}	—
+typescript	NamedTupleMember	{{DotDotDotToken}}{{name}}{{QuestionToken}}: {{Type}}	—
+typescript	TemplateLiteralType	{{Head}}{{TemplateSpans}}	—
+typescript	TemplateLiteralTypeSpan	{{Type}}{{Literal}}	—
+typescript	ImportType	{{IsTypeOf}}import({{Argument}}{{Attributes}}){{Qualifier}}{{TypeArguments}}	—
+typescript	ImportTypeNodeAttributes	\\{ {{Token}}: \\{{{Attributes}}\\} \\}	—
+typescript	ObjectBindingPattern	\\{{{Elements}}\\}	—
+typescript	ArrayBindingPattern	[{{Elements}}]	—
+typescript	BindingElement	{{DotDotDotToken}}{{PropertyName}}{{name}}{{Initializer}}	—
+typescript	ArrayLiteralExpression	[{{Elements}}]	—
+typescript	ObjectLiteralExpression	\\{{{Properties}}\\}	—
+typescript	PropertyAccessExpression · DotToken	{{Expression}}.{{name}}	—
+typescript	PropertyAccessExpression · QuestionDotToken	{{Expression}}{{QuestionDotToken}}{{name}}	—
+typescript	ElementAccessExpression	{{Expression}}{{QuestionDotToken}}[{{ArgumentExpression}}]	—
+typescript	CallExpression	{{Expression}}{{QuestionDotToken}}{{TypeArguments}}({{Arguments}})	—
+typescript	NewExpression	new {{Expression}}{{TypeArguments}}{{Arguments}}	—
+typescript	TaggedTemplateExpression	{{Tag}}{{TypeArguments}} {{Template}}	—
+typescript	TypeAssertionExpression	<{{Type}}>{{Expression}}	—
+typescript	ParenthesizedExpression	({{Expression}})	—
+typescript	FunctionExpression	{{modifiers}}function{{AsteriskToken}} {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescript	ArrowFunction · Block	{{modifiers}}{{TypeParameters}}({{Parameters}}){{Type}} {{EqualsGreaterThanToken}} {{Body}}	—
+typescript	ArrowFunction · Expression	{{modifiers}}{{TypeParameters}}({{Parameters}}){{Type}} {{EqualsGreaterThanToken}} {{Body}}	—
+typescript	DeleteExpression	delete {{Expression}}	—
+typescript	TypeOfExpression	typeof {{Expression}}	—
+typescript	VoidExpression	void {{Expression}}	—
+typescript	AwaitExpression	await {{Expression}}	—
+typescript	PrefixUnaryExpression	{{Operator}}{{Operand}}	—
+typescript	PostfixUnaryExpression	{{Operand}}{{Operator}}	—
+typescript	BinaryExpression	{{Left}} {{OperatorToken}} {{Right}}	—
+typescript	BinaryExpression · CommaToken	{{Left}}{{OperatorToken}} {{Right}}	—
+typescript	ConditionalExpression	{{Condition}} {{QuestionToken}} {{WhenTrue}} {{ColonToken}} {{WhenFalse}}	—
+typescript	TemplateExpression	{{Head}}{{TemplateSpans}}	—
+typescript	TemplateSpan	{{Expression}}{{Literal}}	—
+typescript	YieldExpression	yield{{AsteriskToken}}{{Expression}}	—
+typescript	SpreadElement	...{{Expression}}	—
+typescript	ClassExpression	{{modifiers}}class{{name}}{{TypeParameters}}{{HeritageClauses}} \\{{{Members}}\\}	—
+typescript	ExpressionWithTypeArguments	{{Expression}}{{TypeArguments}}	—
+typescript	AsExpression	{{Expression}} as {{Type}}	—
+typescript	SatisfiesExpression	{{Expression}} satisfies {{Type}}	—
+typescript	NonNullExpression	{{Expression}}!	—
+typescript	MetaProperty	{{KeywordToken}}.{{name}}	—
+typescript	HeritageClause	\s{{Token}} {{Types}}	—
+typescript	CaseBlock	\\{{{Clauses}}\\}	—
+typescript	CaseClause	case {{Expression}}:{{Statements}}	—
+typescript	DefaultClause	default:{{Statements}}	—
+typescript	CatchClause	catch {{VariableDeclaration}}{{Block}}	—
+typescript	VariableDeclarationList	{{Flags}} {{Declarations}}	—
+typescript	VariableDeclaration	{{name}}{{ExclamationToken}}{{Type}}{{Initializer}}	—
+typescript	ImportClause · name	{{PhaseModifier}}{{name}}	—
+typescript	ImportClause · NamedBindings	{{PhaseModifier}}{{NamedBindings}}	—
+typescript	ImportClause · name · NamedBindings	{{PhaseModifier}}{{name}}, {{NamedBindings}}	—
+typescript	NamespaceImport	* as {{name}}	—
+typescript	NamedImports	\\{{{Elements}}\\}	—
+typescript	ImportSpecifier	{{IsTypeOnly}}{{PropertyName}}{{name}}	—
+typescript	NamespaceExport	* as {{name}}	—
+typescript	NamedExports	\\{{{Elements}}\\}	—
+typescript	ExportSpecifier	{{IsTypeOnly}}{{PropertyName}}{{name}}	—
+typescript	ImportAttributes	{{Token}} \\{{{Attributes}}\\}	—
+typescript	ImportAttribute	{{name}}: {{Value}}	—
+typescript	ExternalModuleReference	require({{Expression}})	—
+typescript	AnyKeyword	any	—
+typescript	UnknownKeyword	unknown	—
+typescript	NumberKeyword	number	—
+typescript	BigIntKeyword	bigint	—
+typescript	ObjectKeyword	object	—
+typescript	BooleanKeyword	boolean	—
+typescript	StringKeyword	string	—
+typescript	SymbolKeyword	symbol	—
+typescript	VoidKeyword	void	—
+typescript	UndefinedKeyword	undefined	—
+typescript	NeverKeyword	never	—
+typescript	IntrinsicKeyword	intrinsic	—
+typescript	AbstractKeyword	abstract	—
+typescript	AccessorKeyword	accessor	—
+typescript	AsyncKeyword	async	—
+typescript	ConstKeyword	const	—
+typescript	DeclareKeyword	declare	—
+typescript	DefaultKeyword	default	—
+typescript	ExportKeyword	export	—
+typescript	InKeyword	in	—
+typescript	PrivateKeyword	private	—
+typescript	ProtectedKeyword	protected	—
+typescript	PublicKeyword	public	—
+typescript	ReadonlyKeyword	readonly	—
+typescript	OutKeyword	out	—
+typescript	OverrideKeyword	override	—
+typescript	StaticKeyword	static	—
+typescript	AssertsKeyword	asserts	—
+typescript	AwaitKeyword	await	—
+typescript	ExtendsKeyword	extends	—
+typescript	ImplementsKeyword	implements	—
+typescript	ImportKeyword	import	—
+typescript	NewKeyword	new	—
+typescript	TypeKeyword	type	—
+typescript	DeferKeyword	defer	—
+typescript	SourceKeyword	source	—
+typescript	WithKeyword	with	—
+typescript	AssertKeyword	assert	—
+typescript	ModuleKeyword	module	—
+typescript	NamespaceKeyword	namespace	—
+typescript	GlobalKeyword	global	—
+typescript	TypeOfKeyword	typeof	—
+typescript	KeyOfKeyword	keyof	—
+typescript	UniqueKeyword	unique	—
+typescript	VarKeyword	var	—
+typescript	LetKeyword	let	—
+typescript	UsingKeyword	using	—
+typescript	InstanceOfKeyword	instanceof	—
+typescript	DotDotDotToken	...	—
+typescript	QuestionToken	?	—
+typescript	ExclamationToken	!	—
+typescript	AsteriskToken	*	—
+typescript	QuestionDotToken	?.	—
+typescript	EqualsGreaterThanToken	=>	—
+typescript	ColonToken	:	—
+typescript	CommaToken	,	—
+typescript	PlusToken	+	—
+typescript	MinusToken	-	—
+typescript	TildeToken	~	—
+typescript	PlusPlusToken	++	—
+typescript	MinusMinusToken	--	—
+typescript	PlusToken · ReadonlyKeyword	+readonly	—
+typescript	MinusToken · ReadonlyKeyword	-readonly	—
+typescript	PlusToken · QuestionToken	+?	—
+typescript	MinusToken · QuestionToken	-?	—
+typescript	QuestionQuestionToken	??	—
+typescript	AmpersandAmpersandToken	&&	—
+typescript	BarBarToken	||	—
+typescript	AmpersandToken	&	—
+typescript	BarToken	|	—
+typescript	CaretToken	^	—
+typescript	EqualsEqualsToken	==	—
+typescript	EqualsEqualsEqualsToken	===	—
+typescript	ExclamationEqualsEqualsToken	!==	—
+typescript	ExclamationEqualsToken	!=	—
+typescript	LessThanToken	<	—
+typescript	LessThanEqualsToken	<=	—
+typescript	GreaterThanToken	>	—
+typescript	GreaterThanEqualsToken	>=	—
+typescript	LessThanLessThanToken	<<	—
+typescript	GreaterThanGreaterThanToken	>>	—
+typescript	GreaterThanGreaterThanGreaterThanToken	>>>	—
+typescript	SlashToken	/	—
+typescript	PercentToken	%	—
+typescript	AsteriskAsteriskToken	**	—
+typescript	EqualsToken	=	—
+typescript	PlusEqualsToken	+=	—
+typescript	MinusEqualsToken	-=	—
+typescript	AsteriskEqualsToken	*=	—
+typescript	AsteriskAsteriskEqualsToken	**=	—
+typescript	SlashEqualsToken	/=	—
+typescript	PercentEqualsToken	%=	—
+typescript	LessThanLessThanEqualsToken	<<=	—
+typescript	GreaterThanGreaterThanEqualsToken	>>=	—
+typescript	GreaterThanGreaterThanGreaterThanEqualsToken	>>>=	—
+typescript	AmpersandEqualsToken	&=	—
+typescript	BarEqualsToken	|=	—
+typescript	CaretEqualsToken	^=	—
+typescript	BarBarEqualsToken	||=	—
+typescript	AmpersandAmpersandEqualsToken	&&=	—
+typescript	QuestionQuestionEqualsToken	??=	—
+typescriptreact	Identifier	{{Text}}	—
+typescriptreact	PrivateIdentifier	{{Text}}	—
+typescriptreact	QualifiedName	{{Left}}.{{Right}}	—
+typescriptreact	ComputedPropertyName	[{{Expression}}]	—
+typescriptreact	StringLiteral	{{Text}}	—
+typescriptreact	NumericLiteral	{{Text}}	—
+typescriptreact	BigIntLiteral	{{Text}}	—
+typescriptreact	RegularExpressionLiteral	{{Text}}	—
+typescriptreact	NoSubstitutionTemplateLiteral	{{Text}}	—
+typescriptreact	TemplateHead	{{Text}}	—
+typescriptreact	TemplateMiddle	{{Text}}	—
+typescriptreact	TemplateTail	{{Text}}	—
+typescriptreact	NullLiteral	null	—
+typescriptreact	TrueLiteral	true	—
+typescriptreact	FalseLiteral	false	—
+typescriptreact	ThisExpression	this	—
+typescriptreact	SuperExpression	super	—
+typescriptreact	ImportExpression	import	—
+typescriptreact	TypeParameter	{{modifiers}}{{name}}{{Constraint}}{{DefaultType}}	—
+typescriptreact	MappedTypeParameter	{{name}} in {{Constraint}}	—
+typescriptreact	InferTypeParameter	{{name}}{{Constraint}}	—
+typescriptreact	Parameter	{{modifiers}}{{DotDotDotToken}}{{name}}{{QuestionToken}}{{Type}}{{Initializer}}	—
+typescriptreact	Decorator	@{{Expression}}	—
+typescriptreact	PropertySignature	{{modifiers}}{{name}}{{PostfixToken}}{{Type}};	—
+typescriptreact	PropertyDeclaration	{{modifiers}}{{name}}{{PostfixToken}}{{Type}}{{Initializer}};	—
+typescriptreact	MethodSignature	{{modifiers}}{{name}}{{PostfixToken}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	MethodDeclaration · Body	{{modifiers}}{{AsteriskToken}}{{name}}{{PostfixToken}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescriptreact	MethodDeclaration · SemicolonToken	{{modifiers}}{{AsteriskToken}}{{name}}{{PostfixToken}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	ClassStaticBlockDeclaration	static {{Body}}	—
+typescriptreact	Constructor · Body	{{modifiers}}constructor{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescriptreact	Constructor · SemicolonToken	{{modifiers}}constructor{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	GetAccessor · Body	{{modifiers}}get {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescriptreact	GetAccessor · SemicolonToken	{{modifiers}}get {{name}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	SetAccessor · Body	{{modifiers}}set {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescriptreact	SetAccessor · SemicolonToken	{{modifiers}}set {{name}}{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	CallSignature	{{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	ConstructSignature	new {{TypeParameters}}({{Parameters}}){{Type}};	—
+typescriptreact	IndexSignature	{{modifiers}}[{{Parameters}}]{{Type}};	—
+typescriptreact	SemicolonClassElement	;	—
+typescriptreact	PropertyAssignment	{{name}}: {{Initializer}}	—
+typescriptreact	ShorthandPropertyAssignment	{{name}}{{ObjectAssignmentInitializer}}	—
+typescriptreact	SpreadAssignment	...{{Expression}}	—
+typescriptreact	EnumMember	{{name}}{{Initializer}}	—
+typescriptreact	TypePredicate	{{AssertsModifier}}{{ParameterName}}{{Type}}	—
+typescriptreact	TypeReference	{{TypeName}}{{TypeArguments}}	—
+typescriptreact	FunctionType	{{TypeParameters}}({{Parameters}}) => {{Type}}	—
+typescriptreact	ConstructorType	{{modifiers}}new {{TypeParameters}}({{Parameters}}) => {{Type}}	—
+typescriptreact	TypeQuery	typeof {{ExprName}}{{TypeArguments}}	—
+typescriptreact	TypeLiteral	\\{{{Members}}\\}	—
+typescriptreact	ArrayType	{{ElementType}}[]	—
+typescriptreact	TupleType	[{{Elements}}]	—
+typescriptreact	OptionalType	{{Type}}?	—
+typescriptreact	RestType	...{{Type}}	—
+typescriptreact	UnionType	{{Types}}	—
+typescriptreact	IntersectionType	{{Types}}	—
+typescriptreact	ConditionalType	{{CheckType}} extends {{ExtendsType}} ? {{TrueType}} : {{FalseType}}	—
+typescriptreact	InferType	infer {{TypeParameter}}	—
+typescriptreact	ParenthesizedType	({{Type}})	—
+typescriptreact	ThisType	this	—
+typescriptreact	TypeOperator	{{Operator}} {{Type}}	—
+typescriptreact	IndexedAccessType	{{ObjectType}}[{{IndexType}}]	—
+typescriptreact	MappedType	\\{ {{ReadonlyToken}}[{{TypeParameter}}{{NameType}}]{{QuestionToken}}{{Type}};{{Members}} \\}	—
+typescriptreact	LiteralType	{{Literal}}	—
+typescriptreact	NamedTupleMember	{{DotDotDotToken}}{{name}}{{QuestionToken}}: {{Type}}	—
+typescriptreact	TemplateLiteralType	{{Head}}{{TemplateSpans}}	—
+typescriptreact	TemplateLiteralTypeSpan	{{Type}}{{Literal}}	—
+typescriptreact	ImportType	{{IsTypeOf}}import({{Argument}}{{Attributes}}){{Qualifier}}{{TypeArguments}}	—
+typescriptreact	ImportTypeNodeAttributes	\\{ {{Token}}: \\{{{Attributes}}\\} \\}	—
+typescriptreact	ObjectBindingPattern	\\{{{Elements}}\\}	—
+typescriptreact	ArrayBindingPattern	[{{Elements}}]	—
+typescriptreact	BindingElement	{{DotDotDotToken}}{{PropertyName}}{{name}}{{Initializer}}	—
+typescriptreact	ArrayLiteralExpression	[{{Elements}}]	—
+typescriptreact	ObjectLiteralExpression	\\{{{Properties}}\\}	—
+typescriptreact	PropertyAccessExpression · DotToken	{{Expression}}.{{name}}	—
+typescriptreact	PropertyAccessExpression · QuestionDotToken	{{Expression}}{{QuestionDotToken}}{{name}}	—
+typescriptreact	ElementAccessExpression	{{Expression}}{{QuestionDotToken}}[{{ArgumentExpression}}]	—
+typescriptreact	CallExpression	{{Expression}}{{QuestionDotToken}}{{TypeArguments}}({{Arguments}})	—
+typescriptreact	NewExpression	new {{Expression}}{{TypeArguments}}{{Arguments}}	—
+typescriptreact	TaggedTemplateExpression	{{Tag}}{{TypeArguments}} {{Template}}	—
+typescriptreact	ParenthesizedExpression	({{Expression}})	—
+typescriptreact	FunctionExpression	{{modifiers}}function{{AsteriskToken}} {{name}}{{TypeParameters}}({{Parameters}}){{Type}} {{Body}}	—
+typescriptreact	ArrowFunction · Block	{{modifiers}}{{TypeParameters}}({{Parameters}}){{Type}} {{EqualsGreaterThanToken}} {{Body}}	—
+typescriptreact	ArrowFunction · Expression	{{modifiers}}{{TypeParameters}}({{Parameters}}){{Type}} {{EqualsGreaterThanToken}} {{Body}}	—
+typescriptreact	DeleteExpression	delete {{Expression}}	—
+typescriptreact	TypeOfExpression	typeof {{Expression}}	—
+typescriptreact	VoidExpression	void {{Expression}}	—
+typescriptreact	AwaitExpression	await {{Expression}}	—
+typescriptreact	PrefixUnaryExpression	{{Operator}}{{Operand}}	—
+typescriptreact	PostfixUnaryExpression	{{Operand}}{{Operator}}	—
+typescriptreact	BinaryExpression	{{Left}} {{OperatorToken}} {{Right}}	—
+typescriptreact	BinaryExpression · CommaToken	{{Left}}{{OperatorToken}} {{Right}}	—
+typescriptreact	ConditionalExpression	{{Condition}} {{QuestionToken}} {{WhenTrue}} {{ColonToken}} {{WhenFalse}}	—
+typescriptreact	TemplateExpression	{{Head}}{{TemplateSpans}}	—
+typescriptreact	TemplateSpan	{{Expression}}{{Literal}}	—
+typescriptreact	YieldExpression	yield{{AsteriskToken}}{{Expression}}	—
+typescriptreact	SpreadElement	...{{Expression}}	—
+typescriptreact	ClassExpression	{{modifiers}}class{{name}}{{TypeParameters}}{{HeritageClauses}} \\{{{Members}}\\}	—
+typescriptreact	ExpressionWithTypeArguments	{{Expression}}{{TypeArguments}}	—
+typescriptreact	AsExpression	{{Expression}} as {{Type}}	—
+typescriptreact	SatisfiesExpression	{{Expression}} satisfies {{Type}}	—
+typescriptreact	NonNullExpression	{{Expression}}!	—
+typescriptreact	MetaProperty	{{KeywordToken}}.{{name}}	—
+typescriptreact	HeritageClause	\s{{Token}} {{Types}}	—
+typescriptreact	CaseBlock	\\{{{Clauses}}\\}	—
+typescriptreact	CaseClause	case {{Expression}}:{{Statements}}	—
+typescriptreact	DefaultClause	default:{{Statements}}	—
+typescriptreact	CatchClause	catch {{VariableDeclaration}}{{Block}}	—
+typescriptreact	VariableDeclarationList	{{Flags}} {{Declarations}}	—
+typescriptreact	VariableDeclaration	{{name}}{{ExclamationToken}}{{Type}}{{Initializer}}	—
+typescriptreact	ImportClause · name	{{PhaseModifier}}{{name}}	—
+typescriptreact	ImportClause · NamedBindings	{{PhaseModifier}}{{NamedBindings}}	—
+typescriptreact	ImportClause · name · NamedBindings	{{PhaseModifier}}{{name}}, {{NamedBindings}}	—
+typescriptreact	NamespaceImport	* as {{name}}	—
+typescriptreact	NamedImports	\\{{{Elements}}\\}	—
+typescriptreact	ImportSpecifier	{{IsTypeOnly}}{{PropertyName}}{{name}}	—
+typescriptreact	NamespaceExport	* as {{name}}	—
+typescriptreact	NamedExports	\\{{{Elements}}\\}	—
+typescriptreact	ExportSpecifier	{{IsTypeOnly}}{{PropertyName}}{{name}}	—
+typescriptreact	ImportAttributes	{{Token}} \\{{{Attributes}}\\}	—
+typescriptreact	ImportAttribute	{{name}}: {{Value}}	—
+typescriptreact	ExternalModuleReference	require({{Expression}})	—
+typescriptreact	JsxElement	{{OpeningElement}}{{Children}}{{ClosingElement}}	—
+typescriptreact	JsxSelfClosingElement	<{{TagName}}{{TypeArguments}}{{Attributes}} />	—
+typescriptreact	JsxFragment	{{OpeningFragment}}{{Children}}{{ClosingFragment}}	—
+typescriptreact	JsxOpeningElement	<{{TagName}}{{TypeArguments}}{{Attributes}}>	—
+typescriptreact	JsxClosingElement	</{{TagName}}>	—
+typescriptreact	JsxOpeningFragment	<>	—
+typescriptreact	JsxClosingFragment	</>	—
+typescriptreact	JsxText	{{Text}}	—
+typescriptreact	JsxAttributes	{{Properties}}	—
+typescriptreact	JsxAttribute	{{name}}{{Initializer}}	—
+typescriptreact	JsxSpreadAttribute	\\{...{{Expression}}\\}	—
+typescriptreact	JsxExpression	\\{{{DotDotDotToken}}{{Expression}}\\}	—
+typescriptreact	JsxNamespacedName	{{Namespace}}:{{name}}	—
+typescriptreact	AnyKeyword	any	—
+typescriptreact	UnknownKeyword	unknown	—
+typescriptreact	NumberKeyword	number	—
+typescriptreact	BigIntKeyword	bigint	—
+typescriptreact	ObjectKeyword	object	—
+typescriptreact	BooleanKeyword	boolean	—
+typescriptreact	StringKeyword	string	—
+typescriptreact	SymbolKeyword	symbol	—
+typescriptreact	VoidKeyword	void	—
+typescriptreact	UndefinedKeyword	undefined	—
+typescriptreact	NeverKeyword	never	—
+typescriptreact	IntrinsicKeyword	intrinsic	—
+typescriptreact	AbstractKeyword	abstract	—
+typescriptreact	AccessorKeyword	accessor	—
+typescriptreact	AsyncKeyword	async	—
+typescriptreact	ConstKeyword	const	—
+typescriptreact	DeclareKeyword	declare	—
+typescriptreact	DefaultKeyword	default	—
+typescriptreact	ExportKeyword	export	—
+typescriptreact	InKeyword	in	—
+typescriptreact	PrivateKeyword	private	—
+typescriptreact	ProtectedKeyword	protected	—
+typescriptreact	PublicKeyword	public	—
+typescriptreact	ReadonlyKeyword	readonly	—
+typescriptreact	OutKeyword	out	—
+typescriptreact	OverrideKeyword	override	—
+typescriptreact	StaticKeyword	static	—
+typescriptreact	AssertsKeyword	asserts	—
+typescriptreact	AwaitKeyword	await	—
+typescriptreact	ExtendsKeyword	extends	—
+typescriptreact	ImplementsKeyword	implements	—
+typescriptreact	ImportKeyword	import	—
+typescriptreact	NewKeyword	new	—
+typescriptreact	TypeKeyword	type	—
+typescriptreact	DeferKeyword	defer	—
+typescriptreact	SourceKeyword	source	—
+typescriptreact	WithKeyword	with	—
+typescriptreact	AssertKeyword	assert	—
+typescriptreact	ModuleKeyword	module	—
+typescriptreact	NamespaceKeyword	namespace	—
+typescriptreact	GlobalKeyword	global	—
+typescriptreact	TypeOfKeyword	typeof	—
+typescriptreact	KeyOfKeyword	keyof	—
+typescriptreact	UniqueKeyword	unique	—
+typescriptreact	VarKeyword	var	—
+typescriptreact	LetKeyword	let	—
+typescriptreact	UsingKeyword	using	—
+typescriptreact	InstanceOfKeyword	instanceof	—
+typescriptreact	DotDotDotToken	...	—
+typescriptreact	QuestionToken	?	—
+typescriptreact	ExclamationToken	!	—
+typescriptreact	AsteriskToken	*	—
+typescriptreact	QuestionDotToken	?.	—
+typescriptreact	EqualsGreaterThanToken	=>	—
+typescriptreact	ColonToken	:	—
+typescriptreact	CommaToken	,	—
+typescriptreact	PlusToken	+	—
+typescriptreact	MinusToken	-	—
+typescriptreact	TildeToken	~	—
+typescriptreact	PlusPlusToken	++	—
+typescriptreact	MinusMinusToken	--	—
+typescriptreact	PlusToken · ReadonlyKeyword	+readonly	—
+typescriptreact	MinusToken · ReadonlyKeyword	-readonly	—
+typescriptreact	PlusToken · QuestionToken	+?	—
+typescriptreact	MinusToken · QuestionToken	-?	—
+typescriptreact	QuestionQuestionToken	??	—
+typescriptreact	AmpersandAmpersandToken	&&	—
+typescriptreact	BarBarToken	||	—
+typescriptreact	AmpersandToken	&	—
+typescriptreact	BarToken	|	—
+typescriptreact	CaretToken	^	—
+typescriptreact	EqualsEqualsToken	==	—
+typescriptreact	EqualsEqualsEqualsToken	===	—
+typescriptreact	ExclamationEqualsEqualsToken	!==	—
+typescriptreact	ExclamationEqualsToken	!=	—
+typescriptreact	LessThanToken	<	—
+typescriptreact	LessThanEqualsToken	<=	—
+typescriptreact	GreaterThanToken	>	—
+typescriptreact	GreaterThanEqualsToken	>=	—
+typescriptreact	LessThanLessThanToken	<<	—
+typescriptreact	GreaterThanGreaterThanToken	>>	—
+typescriptreact	GreaterThanGreaterThanGreaterThanToken	>>>	—
+typescriptreact	SlashToken	/	—
+typescriptreact	PercentToken	%	—
+typescriptreact	AsteriskAsteriskToken	**	—
+typescriptreact	EqualsToken	=	—
+typescriptreact	PlusEqualsToken	+=	—
+typescriptreact	MinusEqualsToken	-=	—
+typescriptreact	AsteriskEqualsToken	*=	—
+typescriptreact	AsteriskAsteriskEqualsToken	**=	—
+typescriptreact	SlashEqualsToken	/=	—
+typescriptreact	PercentEqualsToken	%=	—
+typescriptreact	LessThanLessThanEqualsToken	<<=	—
+typescriptreact	GreaterThanGreaterThanEqualsToken	>>=	—
+typescriptreact	GreaterThanGreaterThanGreaterThanEqualsToken	>>>=	—
+typescriptreact	AmpersandEqualsToken	&=	—
+typescriptreact	BarEqualsToken	|=	—
+typescriptreact	CaretEqualsToken	^=	—
+typescriptreact	BarBarEqualsToken	||=	—
+typescriptreact	AmpersandAmpersandEqualsToken	&&=	—
+typescriptreact	QuestionQuestionEqualsToken	??=	—
+6-placeholders
+container	notation	kind	place	holds	holds_kind	qualifier	prefix	separator	suffix	offset
+MODULE	—	{{name}} · .json	{{name}}.json	FILE	.json	one	—	—	—	—
+MODULE	—	{{name}} · .prisma	{{name}}.prisma	FILE	.prisma	one	—	—	—	—
+MODULE	—	{{name}} · .css	{{name}}.css	FILE	.css	one	—	—	—	—
+MODULE	—	{{name}} · .ts	{{name}}.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	{{name}} · .tsx	{{name}}.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	{{name}} · .mtsv	{{name}}.mtsv	FILE	.mtsv	one	—	—	—	—
+MODULE	—	layout · .tsx	layout.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	template · .tsx	template.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	error · .tsx	error.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	loading · .tsx	loading.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	not-found · .tsx	not-found.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	page · .tsx	page.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	default · .tsx	default.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	forbidden · .tsx	forbidden.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	unauthorized · .tsx	unauthorized.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	route · .ts	route.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	global-error · .tsx	global-error.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	global-not-found · .tsx	global-not-found.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	instrumentation · .ts	instrumentation.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	instrumentation-client · .ts	instrumentation-client.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	proxy · .ts	proxy.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	mdx-components · .tsx	mdx-components.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	favicon · .ico	favicon.ico	FILE	.ico	one	—	—	—	—
+MODULE	—	icon · .ico	icon.ico	FILE	.ico	one	—	—	—	—
+MODULE	—	icon · .jpg	icon.jpg	FILE	.jpg	one	—	—	—	—
+MODULE	—	icon · .jpeg	icon.jpeg	FILE	.jpeg	one	—	—	—	—
+MODULE	—	icon · .png	icon.png	FILE	.png	one	—	—	—	—
+MODULE	—	icon · .svg	icon.svg	FILE	.svg	one	—	—	—	—
+MODULE	—	icon · .ts	icon.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	icon · .tsx	icon.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	icon{{name}} · .ico	icon{{name}}.ico	FILE	.ico	one	—	—	—	—
+MODULE	—	icon{{name}} · .jpg	icon{{name}}.jpg	FILE	.jpg	one	—	—	—	—
+MODULE	—	icon{{name}} · .jpeg	icon{{name}}.jpeg	FILE	.jpeg	one	—	—	—	—
+MODULE	—	icon{{name}} · .png	icon{{name}}.png	FILE	.png	one	—	—	—	—
+MODULE	—	icon{{name}} · .svg	icon{{name}}.svg	FILE	.svg	one	—	—	—	—
+MODULE	—	apple-icon · .jpg	apple-icon.jpg	FILE	.jpg	one	—	—	—	—
+MODULE	—	apple-icon · .jpeg	apple-icon.jpeg	FILE	.jpeg	one	—	—	—	—
+MODULE	—	apple-icon · .png	apple-icon.png	FILE	.png	one	—	—	—	—
+MODULE	—	apple-icon · .ts	apple-icon.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	apple-icon · .tsx	apple-icon.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	apple-icon{{name}} · .jpg	apple-icon{{name}}.jpg	FILE	.jpg	one	—	—	—	—
+MODULE	—	apple-icon{{name}} · .jpeg	apple-icon{{name}}.jpeg	FILE	.jpeg	one	—	—	—	—
+MODULE	—	apple-icon{{name}} · .png	apple-icon{{name}}.png	FILE	.png	one	—	—	—	—
+MODULE	—	opengraph-image · .jpg	opengraph-image.jpg	FILE	.jpg	one	—	—	—	—
+MODULE	—	opengraph-image · .jpeg	opengraph-image.jpeg	FILE	.jpeg	one	—	—	—	—
+MODULE	—	opengraph-image · .png	opengraph-image.png	FILE	.png	one	—	—	—	—
+MODULE	—	opengraph-image · .gif	opengraph-image.gif	FILE	.gif	one	—	—	—	—
+MODULE	—	opengraph-image · .ts	opengraph-image.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	opengraph-image · .tsx	opengraph-image.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	opengraph-image.alt · .txt	opengraph-image.alt.txt	FILE	.txt	one	—	—	—	—
+MODULE	—	twitter-image · .jpg	twitter-image.jpg	FILE	.jpg	one	—	—	—	—
+MODULE	—	twitter-image · .jpeg	twitter-image.jpeg	FILE	.jpeg	one	—	—	—	—
+MODULE	—	twitter-image · .png	twitter-image.png	FILE	.png	one	—	—	—	—
+MODULE	—	twitter-image · .gif	twitter-image.gif	FILE	.gif	one	—	—	—	—
+MODULE	—	twitter-image · .ts	twitter-image.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	twitter-image · .tsx	twitter-image.tsx	FILE	.tsx	one	—	—	—	—
+MODULE	—	twitter-image.alt · .txt	twitter-image.alt.txt	FILE	.txt	one	—	—	—	—
+MODULE	—	manifest · .json	manifest.json	FILE	.json	one	—	—	—	—
+MODULE	—	manifest · .webmanifest	manifest.webmanifest	FILE	.webmanifest	one	—	—	—	—
+MODULE	—	manifest · .ts	manifest.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	robots · .txt	robots.txt	FILE	.txt	one	—	—	—	—
+MODULE	—	robots · .ts	robots.ts	FILE	.ts	one	—	—	—	—
+MODULE	—	sitemap · .xml	sitemap.xml	FILE	.xml	one	—	—	—	—
+MODULE	—	sitemap · .ts	sitemap.ts	FILE	.ts	one	—	—	—	—
+FILE	css	.css	stylesheet	BODY	stylesheet	one	—	—	—	—
+BODY	css	stylesheet	body	STATEMENT	—	sequence	—	—	—	—
+BODY	css	block's contents	body	STATEMENT	—	sequence	\n	\n	\n	2
+BODY	css	list of declarations	body	STATEMENT	—	sequence	—	\s	—	—
+STATEMENT	css	qualified rule	prelude	EXPRESSION	—	sequence	—	—	—	—
+STATEMENT	css	qualified rule	block	BODY	block's contents	one	—	—	—	—
+STATEMENT	css	at-rule · {}-block	name	EXPRESSION	at-keyword-token	one	—	—	—	—
+STATEMENT	css	at-rule · {}-block	prelude	EXPRESSION	—	sequence	\s	—	—	—
+STATEMENT	css	at-rule · {}-block	block	BODY	block's contents	one	—	—	—	—
+STATEMENT	css	at-rule · semicolon-token	name	EXPRESSION	at-keyword-token	one	—	—	—	—
+STATEMENT	css	at-rule · semicolon-token	prelude	EXPRESSION	—	sequence	\s	—	—	—
+STATEMENT	css	declaration	name	EXPRESSION	ident-token	one	—	—	—	—
+STATEMENT	css	declaration	value	EXPRESSION	—	sequence	—	—	—	—
+STATEMENT	css	declaration	important	EXPRESSION	important	optional	\s	—	—	—
+STATEMENT	css	list of declarations	declarations	BODY	list of declarations	one	—	—	—	—
+EXPRESSION	css	function	name	TEXT	—	one	—	—	—	—
+EXPRESSION	css	function	value	EXPRESSION	—	sequence	—	—	—	—
+EXPRESSION	css	[]-block	value	EXPRESSION	—	sequence	—	—	—	—
+EXPRESSION	css	()-block	value	EXPRESSION	—	sequence	—	—	—	—
+EXPRESSION	css	{}-block	value	EXPRESSION	—	sequence	—	—	—	—
+EXPRESSION	css	ident-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	at-keyword-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	hash-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	string-token	value	TEXT	—	optional	—	—	—	—
+EXPRESSION	css	url-token	value	TEXT	—	optional	—	—	—	—
+EXPRESSION	css	delim-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	number-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	percentage-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	dimension-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	dimension-token	unit	TEXT	—	one	—	—	—	—
+EXPRESSION	css	unicode-range-token	value	TEXT	—	one	—	—	—	—
+EXPRESSION	css	whitespace-token	value	TEXT	—	one	—	—	—	—
+FILE	json	.json	JSON-text	BODY	JSON-text	one	—	—	—	—
+BODY	json	JSON-text	value	STATEMENT	—	one	—	—	—	—
+STATEMENT	json	value	value	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	json	object	member	EXPRESSION	member	sequence	—	,	—	—
+EXPRESSION	json	member	string	EXPRESSION	string	one	—	—	—	—
+EXPRESSION	json	member	value	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	json	array	value	EXPRESSION	—	sequence	—	,	—	—
+EXPRESSION	json	number	minus	TEXT	—	optional	—	—	—	—
+EXPRESSION	json	number	int	TEXT	—	one	—	—	—	—
+EXPRESSION	json	number	frac	TEXT	—	optional	—	—	—	—
+EXPRESSION	json	number	exp	TEXT	—	optional	—	—	—	—
+EXPRESSION	json	string	char	TEXT	—	optional	—	—	—	—
+FILE	prisma	.prisma	schema	BODY	schema	one	—	—	—	—
+BODY	prisma	schema	body	STATEMENT	—	sequence	—	\n	—	—
+BODY	prisma	model_contents	body	STATEMENT	—	sequence	—	\n	\n	2
+BODY	prisma	config_contents	body	STATEMENT	—	sequence	—	\n	\n	2
+BODY	prisma	enum_contents	body	STATEMENT	—	sequence	—	\n	\n	2
+STATEMENT	prisma	model_declaration	keyword	EXPRESSION	—	one	—	—	—	—
+STATEMENT	prisma	model_declaration	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	model_declaration	model_contents	BODY	model_contents	one	—	—	—	—
+STATEMENT	prisma	enum_declaration	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	enum_declaration	enum_contents	BODY	enum_contents	one	—	—	—	—
+STATEMENT	prisma	config_block	keyword	EXPRESSION	—	one	—	—	—	—
+STATEMENT	prisma	config_block	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	config_block	config_contents	BODY	config_contents	one	—	—	—	—
+STATEMENT	prisma	type_alias	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	type_alias	base_type	EXPRESSION	—	one	—	—	—	—
+STATEMENT	prisma	type_alias	field_attribute	EXPRESSION	field_attribute	sequence	\s	\s	—	—
+STATEMENT	prisma	field_declaration	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	field_declaration	field_type	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	prisma	field_declaration	field_attribute	EXPRESSION	field_attribute	sequence	\s	\s	—	—
+STATEMENT	prisma	block_attribute	path	EXPRESSION	path	one	—	—	—	—
+STATEMENT	prisma	block_attribute	arguments_list	EXPRESSION	arguments_list	optional	—	—	—	—
+STATEMENT	prisma	key_value	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	key_value	expression	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	prisma	enum_value_declaration	identifier	EXPRESSION	identifier	one	—	—	—	—
+STATEMENT	prisma	enum_value_declaration	field_attribute	EXPRESSION	field_attribute	sequence	\s	\s	—	—
+EXPRESSION	prisma	list_type	base_type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	prisma	optional_type	base_type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	prisma	unsupported_optional_list_type	base_type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	prisma	unsupported_type	string_literal	EXPRESSION	string_literal	one	—	—	—	—
+EXPRESSION	prisma	field_attribute	path	EXPRESSION	path	one	—	—	—	—
+EXPRESSION	prisma	field_attribute	arguments_list	EXPRESSION	arguments_list	optional	—	—	—	—
+EXPRESSION	prisma	arguments_list	argument	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	prisma	named_argument	identifier	EXPRESSION	identifier	one	—	—	—	—
+EXPRESSION	prisma	named_argument	expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	prisma	empty_argument	identifier	EXPRESSION	identifier	one	—	—	—	—
+EXPRESSION	prisma	function_call	path	EXPRESSION	path	one	—	—	—	—
+EXPRESSION	prisma	function_call	arguments_list	EXPRESSION	arguments_list	one	—	—	—	—
+EXPRESSION	prisma	array_expression	expression	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	prisma	object_expression	object_member	EXPRESSION	object_member	sequence	—	,\s	—	—
+EXPRESSION	prisma	object_member	identifier	EXPRESSION	identifier	one	—	—	—	—
+EXPRESSION	prisma	object_member	expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	prisma	numeric_literal	numeric_literal	TEXT	—	one	—	—	—	—
+EXPRESSION	prisma	string_literal	string_content	TEXT	—	optional	—	—	—	—
+EXPRESSION	prisma	path	path	TEXT	—	one	—	—	—	—
+EXPRESSION	prisma	identifier	identifier	TEXT	—	one	—	—	—	—
+FILE	typescript	.ts	SourceFile	BODY	SourceFile	one	—	—	—	—
+BODY	typescript	SourceFile	Statements	STATEMENT	—	sequence	—	\n	—	—
+BODY	typescript	Block	Statements	STATEMENT	—	sequence	\n	\n	\n	4
+BODY	typescript	ModuleBlock	Statements	STATEMENT	—	sequence	\n	\n	\n	4
+BODY	typescript	Statements	Statements	STATEMENT	—	sequence	\n	\n	—	4
+STATEMENT	typescript	Block	Block	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	VariableStatement	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	VariableStatement	DeclarationList	EXPRESSION	VariableDeclarationList	one	—	—	—	—
+STATEMENT	typescript	ExpressionStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	IfStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	IfStatement	ThenStatement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	IfStatement · ElseStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	IfStatement · ElseStatement	ThenStatement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	IfStatement · ElseStatement	ElseStatement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	DoStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	DoStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	WhileStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	WhileStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	ForStatement	Initializer	EXPRESSION	—	optional	—	—	—	—
+STATEMENT	typescript	ForStatement	Condition	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	typescript	ForStatement	Incrementor	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	typescript	ForStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	ForInStatement	Initializer	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ForInStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ForInStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	ForOfStatement	AwaitModifier	EXPRESSION	AwaitKeyword	optional	—	—	\s	—
+STATEMENT	typescript	ForOfStatement	Initializer	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ForOfStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ForOfStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	ContinueStatement	Label	EXPRESSION	Identifier	optional	\s	—	—	—
+STATEMENT	typescript	BreakStatement	Label	EXPRESSION	Identifier	optional	\s	—	—	—
+STATEMENT	typescript	ReturnStatement	Expression	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	typescript	WithStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	WithStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	SwitchStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	SwitchStatement	CaseBlock	EXPRESSION	CaseBlock	one	—	—	—	—
+STATEMENT	typescript	LabeledStatement	Label	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescript	LabeledStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	ThrowStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	TryStatement	TryBlock	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	TryStatement	CatchClause	EXPRESSION	CatchClause	one	—	—	—	—
+STATEMENT	typescript	TryStatement · FinallyBlock	TryBlock	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	TryStatement · FinallyBlock	CatchClause	EXPRESSION	CatchClause	optional	\n	—	—	—
+STATEMENT	typescript	TryStatement · FinallyBlock	FinallyBlock	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	FunctionDeclaration · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	FunctionDeclaration · Body	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+STATEMENT	typescript	FunctionDeclaration · Body	name	EXPRESSION	Identifier	optional	—	—	—	—
+STATEMENT	typescript	FunctionDeclaration · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescript	FunctionDeclaration · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+STATEMENT	typescript	FunctionDeclaration · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+STATEMENT	typescript	FunctionDeclaration · Body	Body	BODY	Block	one	—	—	—	—
+STATEMENT	typescript	FunctionDeclaration · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	FunctionDeclaration · SemicolonToken	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+STATEMENT	typescript	FunctionDeclaration · SemicolonToken	name	EXPRESSION	Identifier	optional	—	—	—	—
+STATEMENT	typescript	FunctionDeclaration · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescript	FunctionDeclaration · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+STATEMENT	typescript	FunctionDeclaration · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+STATEMENT	typescript	ClassDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ClassDeclaration	name	EXPRESSION	Identifier	optional	\s	—	—	—
+STATEMENT	typescript	ClassDeclaration	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescript	ClassDeclaration	HeritageClauses	EXPRESSION	HeritageClause	sequence	—	—	—	—
+STATEMENT	typescript	ClassDeclaration	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+STATEMENT	typescript	InterfaceDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	InterfaceDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescript	InterfaceDeclaration	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescript	InterfaceDeclaration	HeritageClauses	EXPRESSION	HeritageClause	sequence	—	—	—	—
+STATEMENT	typescript	InterfaceDeclaration	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+STATEMENT	typescript	TypeAliasDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	TypeAliasDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescript	TypeAliasDeclaration	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescript	TypeAliasDeclaration	Type	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	EnumDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	EnumDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescript	EnumDeclaration	Members	EXPRESSION	EnumMember	sequence	\n	,\n	\n	4
+STATEMENT	typescript	ModuleDeclaration · ModuleBlock	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ModuleDeclaration · ModuleBlock	Keyword	EXPRESSION	—	optional	—	—	\s	—
+STATEMENT	typescript	ModuleDeclaration · ModuleBlock	name	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ModuleDeclaration · ModuleBlock	Attributes	EXPRESSION	—	optional	\swith\s	—	—	—
+STATEMENT	typescript	ModuleDeclaration · ModuleBlock	Body	BODY	ModuleBlock	one	—	—	—	—
+STATEMENT	typescript	ModuleDeclaration · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ModuleDeclaration · SemicolonToken	Keyword	EXPRESSION	—	optional	—	—	\s	—
+STATEMENT	typescript	ModuleDeclaration · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ModuleDeclaration · SemicolonToken	Attributes	EXPRESSION	—	optional	\swith\s	—	—	—
+STATEMENT	typescript	ImportEqualsDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ImportEqualsDeclaration	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+STATEMENT	typescript	ImportEqualsDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescript	ImportEqualsDeclaration	ModuleReference	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ImportDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ImportDeclaration	ImportClause	EXPRESSION	—	optional	—	—	\sfrom\s	—
+STATEMENT	typescript	ImportDeclaration	ModuleSpecifier	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ImportDeclaration	Attributes	EXPRESSION	ImportAttributes	optional	\s	—	—	—
+STATEMENT	typescript	ExportAssignment	IsExportEquals	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ExportAssignment	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ExportDeclaration · ExportClause	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ExportDeclaration · ExportClause	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+STATEMENT	typescript	ExportDeclaration · ExportClause	ExportClause	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescript	ExportDeclaration · ExportClause	ModuleSpecifier	EXPRESSION	—	optional	\sfrom\s	—	—	—
+STATEMENT	typescript	ExportDeclaration · ExportClause	Attributes	EXPRESSION	ImportAttributes	optional	\s	—	—	—
+STATEMENT	typescript	ExportDeclaration · AsteriskToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescript	ExportDeclaration · AsteriskToken	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+STATEMENT	typescript	ExportDeclaration · AsteriskToken	ModuleSpecifier	EXPRESSION	—	optional	\sfrom\s	—	—	—
+STATEMENT	typescript	ExportDeclaration · AsteriskToken	Attributes	EXPRESSION	ImportAttributes	optional	\s	—	—	—
+STATEMENT	typescript	NamespaceExportDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	Identifier	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	PrivateIdentifier	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	QualifiedName	Left	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	QualifiedName	Right	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ComputedPropertyName	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	StringLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	NumericLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	BigIntLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	RegularExpressionLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	NoSubstitutionTemplateLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateHead	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateMiddle	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateTail	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescript	TypeParameter	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	TypeParameter	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	TypeParameter	Constraint	EXPRESSION	—	optional	\sextends\s	—	—	—
+EXPRESSION	typescript	TypeParameter	DefaultType	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	MappedTypeParameter	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	MappedTypeParameter	Constraint	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	InferTypeParameter	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	InferTypeParameter	Constraint	EXPRESSION	—	optional	\sextends\s	—	—	—
+EXPRESSION	typescript	Parameter	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	Parameter	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescript	Parameter	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	Parameter	QuestionToken	EXPRESSION	QuestionToken	optional	—	—	—	—
+EXPRESSION	typescript	Parameter	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	Parameter	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	Decorator	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertySignature	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	PropertySignature	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertySignature	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	PropertySignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	PropertyDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	PropertyDeclaration	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertyDeclaration	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	PropertyDeclaration	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	PropertyDeclaration	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	MethodSignature	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	MethodSignature	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	MethodSignature	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	MethodSignature	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	MethodSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	MethodSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	MethodDeclaration · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	MethodDeclaration · Body	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · Body	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · Body	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	MethodDeclaration · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	MethodDeclaration · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	MethodDeclaration · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	MethodDeclaration · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	ClassStaticBlockDeclaration	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	Constructor · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	Constructor · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	Constructor · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	Constructor · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	Constructor · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	Constructor · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	Constructor · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	Constructor · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	Constructor · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	GetAccessor · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	GetAccessor · Body	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	GetAccessor · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	GetAccessor · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	GetAccessor · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	GetAccessor · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	GetAccessor · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	GetAccessor · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	GetAccessor · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	GetAccessor · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	GetAccessor · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	SetAccessor · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	SetAccessor · Body	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	SetAccessor · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	SetAccessor · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	SetAccessor · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	SetAccessor · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	SetAccessor · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	SetAccessor · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	SetAccessor · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	SetAccessor · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	SetAccessor · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	CallSignature	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	CallSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	CallSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	ConstructSignature	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	ConstructSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	ConstructSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	IndexSignature	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	IndexSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	IndexSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	PropertyAssignment	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertyAssignment	Initializer	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ShorthandPropertyAssignment	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	ShorthandPropertyAssignment	ObjectAssignmentInitializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	SpreadAssignment	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	EnumMember	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	EnumMember	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	TypePredicate	AssertsModifier	EXPRESSION	AssertsKeyword	optional	—	—	\s	—
+EXPRESSION	typescript	TypePredicate	ParameterName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypePredicate	Type	EXPRESSION	—	optional	\sis\s	—	—	—
+EXPRESSION	typescript	TypeReference	TypeName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeReference	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	FunctionType	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	FunctionType	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	FunctionType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConstructorType	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	ConstructorType	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	ConstructorType	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	ConstructorType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeQuery	ExprName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeQuery	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	TypeLiteral	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+EXPRESSION	typescript	ArrayType	ElementType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TupleType	Elements	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescript	OptionalType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	RestType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	UnionType	Types	EXPRESSION	—	sequence	—	\s|\s	—	—
+EXPRESSION	typescript	IntersectionType	Types	EXPRESSION	—	sequence	—	\s&\s	—	—
+EXPRESSION	typescript	ConditionalType	CheckType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConditionalType	ExtendsType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConditionalType	TrueType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConditionalType	FalseType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	InferType	TypeParameter	EXPRESSION	InferTypeParameter	one	—	—	—	—
+EXPRESSION	typescript	ParenthesizedType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeOperator	Operator	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeOperator	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	IndexedAccessType	ObjectType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	IndexedAccessType	IndexType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	MappedType	ReadonlyToken	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescript	MappedType	TypeParameter	EXPRESSION	MappedTypeParameter	one	—	—	—	—
+EXPRESSION	typescript	MappedType	NameType	EXPRESSION	—	optional	\sas\s	—	—	—
+EXPRESSION	typescript	MappedType	QuestionToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	MappedType	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	MappedType	Members	EXPRESSION	—	sequence	\s	\s	—	—
+EXPRESSION	typescript	LiteralType	Literal	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	NamedTupleMember	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescript	NamedTupleMember	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	NamedTupleMember	QuestionToken	EXPRESSION	QuestionToken	optional	—	—	—	—
+EXPRESSION	typescript	NamedTupleMember	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateLiteralType	Head	EXPRESSION	TemplateHead	one	—	—	—	—
+EXPRESSION	typescript	TemplateLiteralType	TemplateSpans	EXPRESSION	TemplateLiteralTypeSpan	sequence	—	—	—	—
+EXPRESSION	typescript	TemplateLiteralTypeSpan	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateLiteralTypeSpan	Literal	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportType	IsTypeOf	EXPRESSION	TypeOfKeyword	optional	—	—	\s	—
+EXPRESSION	typescript	ImportType	Argument	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportType	Attributes	EXPRESSION	ImportTypeNodeAttributes	optional	,\s	—	—	—
+EXPRESSION	typescript	ImportType	Qualifier	EXPRESSION	—	optional	.	—	—	—
+EXPRESSION	typescript	ImportType	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	ImportTypeNodeAttributes	Token	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportTypeNodeAttributes	Attributes	EXPRESSION	ImportAttribute	sequence	\s	,\s	\s	—
+EXPRESSION	typescript	ObjectBindingPattern	Elements	EXPRESSION	BindingElement	sequence	\s	,\s	\s	—
+EXPRESSION	typescript	ArrayBindingPattern	Elements	EXPRESSION	BindingElement	sequence	—	,\s	—	—
+EXPRESSION	typescript	BindingElement	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescript	BindingElement	PropertyName	EXPRESSION	—	optional	—	—	:\s	—
+EXPRESSION	typescript	BindingElement	name	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescript	BindingElement	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	ArrayLiteralExpression	Elements	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescript	ObjectLiteralExpression	Properties	EXPRESSION	—	sequence	\s	,\s	\s	—
+EXPRESSION	typescript	PropertyAccessExpression · DotToken	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertyAccessExpression · DotToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertyAccessExpression · QuestionDotToken	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PropertyAccessExpression · QuestionDotToken	QuestionDotToken	EXPRESSION	QuestionDotToken	one	—	—	—	—
+EXPRESSION	typescript	PropertyAccessExpression · QuestionDotToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ElementAccessExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ElementAccessExpression	QuestionDotToken	EXPRESSION	QuestionDotToken	optional	—	—	—	—
+EXPRESSION	typescript	ElementAccessExpression	ArgumentExpression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	CallExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	CallExpression	QuestionDotToken	EXPRESSION	QuestionDotToken	optional	—	—	—	—
+EXPRESSION	typescript	CallExpression	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	CallExpression	Arguments	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescript	NewExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	NewExpression	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	NewExpression	Arguments	EXPRESSION	—	sequence	(	,\s	)	—
+EXPRESSION	typescript	TaggedTemplateExpression	Tag	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TaggedTemplateExpression	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	TaggedTemplateExpression	Template	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeAssertionExpression	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeAssertionExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ParenthesizedExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	FunctionExpression	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	FunctionExpression	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescript	FunctionExpression	name	EXPRESSION	Identifier	optional	—	—	—	—
+EXPRESSION	typescript	FunctionExpression	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	FunctionExpression	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	FunctionExpression	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	FunctionExpression	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	ArrowFunction · Block	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	ArrowFunction · Block	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	ArrowFunction · Block	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	ArrowFunction · Block	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	ArrowFunction · Block	EqualsGreaterThanToken	EXPRESSION	EqualsGreaterThanToken	one	—	—	—	—
+EXPRESSION	typescript	ArrowFunction · Block	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	ArrowFunction · Expression	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	ArrowFunction · Expression	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	ArrowFunction · Expression	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescript	ArrowFunction · Expression	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	ArrowFunction · Expression	EqualsGreaterThanToken	EXPRESSION	EqualsGreaterThanToken	one	—	—	—	—
+EXPRESSION	typescript	ArrowFunction · Expression	Body	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	DeleteExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TypeOfExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	VoidExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	AwaitExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PrefixUnaryExpression	Operator	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PrefixUnaryExpression	Operand	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PostfixUnaryExpression	Operand	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	PostfixUnaryExpression	Operator	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	BinaryExpression	Left	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	BinaryExpression	OperatorToken	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	BinaryExpression	Right	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	BinaryExpression · CommaToken	Left	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	BinaryExpression · CommaToken	OperatorToken	EXPRESSION	CommaToken	one	—	—	—	—
+EXPRESSION	typescript	BinaryExpression · CommaToken	Right	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConditionalExpression	Condition	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConditionalExpression	QuestionToken	EXPRESSION	QuestionToken	one	—	—	—	—
+EXPRESSION	typescript	ConditionalExpression	WhenTrue	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ConditionalExpression	ColonToken	EXPRESSION	ColonToken	one	—	—	—	—
+EXPRESSION	typescript	ConditionalExpression	WhenFalse	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateExpression	Head	EXPRESSION	TemplateHead	one	—	—	—	—
+EXPRESSION	typescript	TemplateExpression	TemplateSpans	EXPRESSION	TemplateSpan	sequence	—	—	—	—
+EXPRESSION	typescript	TemplateSpan	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	TemplateSpan	Literal	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	YieldExpression	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescript	YieldExpression	Expression	EXPRESSION	—	optional	\s	—	—	—
+EXPRESSION	typescript	SpreadElement	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ClassExpression	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescript	ClassExpression	name	EXPRESSION	Identifier	optional	\s	—	—	—
+EXPRESSION	typescript	ClassExpression	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescript	ClassExpression	HeritageClauses	EXPRESSION	HeritageClause	sequence	—	—	—	—
+EXPRESSION	typescript	ClassExpression	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+EXPRESSION	typescript	ExpressionWithTypeArguments	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ExpressionWithTypeArguments	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescript	AsExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	AsExpression	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	SatisfiesExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	SatisfiesExpression	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	NonNullExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	MetaProperty	KeywordToken	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	MetaProperty	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	HeritageClause	Token	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	HeritageClause	Types	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescript	CaseBlock	Clauses	EXPRESSION	—	sequence	\n	\n	\n	4
+EXPRESSION	typescript	CaseClause	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	CaseClause	Statements	BODY	Statements	one	—	—	—	—
+EXPRESSION	typescript	DefaultClause	Statements	BODY	Statements	one	—	—	—	—
+EXPRESSION	typescript	CatchClause	VariableDeclaration	EXPRESSION	VariableDeclaration	optional	(	—	)\s	—
+EXPRESSION	typescript	CatchClause	Block	BODY	Block	one	—	—	—	—
+EXPRESSION	typescript	VariableDeclarationList	Flags	EXPRESSION	—	sequence	—	\s	—	—
+EXPRESSION	typescript	VariableDeclarationList	Declarations	EXPRESSION	VariableDeclaration	sequence	—	,\s	—	—
+EXPRESSION	typescript	VariableDeclaration	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	VariableDeclaration	ExclamationToken	EXPRESSION	ExclamationToken	optional	—	—	—	—
+EXPRESSION	typescript	VariableDeclaration	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescript	VariableDeclaration	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescript	ImportClause · name	PhaseModifier	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescript	ImportClause · name	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	ImportClause · NamedBindings	PhaseModifier	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescript	ImportClause · NamedBindings	NamedBindings	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportClause · name · NamedBindings	PhaseModifier	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescript	ImportClause · name · NamedBindings	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	ImportClause · name · NamedBindings	NamedBindings	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	NamespaceImport	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	NamedImports	Elements	EXPRESSION	ImportSpecifier	sequence	\s	,\s	\s	—
+EXPRESSION	typescript	ImportSpecifier	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+EXPRESSION	typescript	ImportSpecifier	PropertyName	EXPRESSION	—	optional	—	—	\sas\s	—
+EXPRESSION	typescript	ImportSpecifier	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescript	NamespaceExport	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	NamedExports	Elements	EXPRESSION	ExportSpecifier	sequence	\s	,\s	\s	—
+EXPRESSION	typescript	ExportSpecifier	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+EXPRESSION	typescript	ExportSpecifier	PropertyName	EXPRESSION	—	optional	—	—	\sas\s	—
+EXPRESSION	typescript	ExportSpecifier	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportAttributes	Token	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportAttributes	Attributes	EXPRESSION	ImportAttribute	sequence	\s	,\s	\s	—
+EXPRESSION	typescript	ImportAttribute	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ImportAttribute	Value	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescript	ExternalModuleReference	Expression	EXPRESSION	StringLiteral	one	—	—	—	—
+FILE	typescriptreact	.tsx	SourceFile	BODY	SourceFile	one	—	—	—	—
+BODY	typescriptreact	SourceFile	Statements	STATEMENT	—	sequence	—	\n	—	—
+BODY	typescriptreact	Block	Statements	STATEMENT	—	sequence	\n	\n	\n	4
+BODY	typescriptreact	ModuleBlock	Statements	STATEMENT	—	sequence	\n	\n	\n	4
+BODY	typescriptreact	Statements	Statements	STATEMENT	—	sequence	\n	\n	—	4
+STATEMENT	typescriptreact	Block	Block	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	VariableStatement	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	VariableStatement	DeclarationList	EXPRESSION	VariableDeclarationList	one	—	—	—	—
+STATEMENT	typescriptreact	ExpressionStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	IfStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	IfStatement	ThenStatement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	IfStatement · ElseStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	IfStatement · ElseStatement	ThenStatement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	IfStatement · ElseStatement	ElseStatement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	DoStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	DoStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	WhileStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	WhileStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	ForStatement	Initializer	EXPRESSION	—	optional	—	—	—	—
+STATEMENT	typescriptreact	ForStatement	Condition	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	typescriptreact	ForStatement	Incrementor	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	typescriptreact	ForStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	ForInStatement	Initializer	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ForInStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ForInStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	ForOfStatement	AwaitModifier	EXPRESSION	AwaitKeyword	optional	—	—	\s	—
+STATEMENT	typescriptreact	ForOfStatement	Initializer	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ForOfStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ForOfStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	ContinueStatement	Label	EXPRESSION	Identifier	optional	\s	—	—	—
+STATEMENT	typescriptreact	BreakStatement	Label	EXPRESSION	Identifier	optional	\s	—	—	—
+STATEMENT	typescriptreact	ReturnStatement	Expression	EXPRESSION	—	optional	\s	—	—	—
+STATEMENT	typescriptreact	WithStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	WithStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	SwitchStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	SwitchStatement	CaseBlock	EXPRESSION	CaseBlock	one	—	—	—	—
+STATEMENT	typescriptreact	LabeledStatement	Label	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescriptreact	LabeledStatement	Statement	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	ThrowStatement	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	TryStatement	TryBlock	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	TryStatement	CatchClause	EXPRESSION	CatchClause	one	—	—	—	—
+STATEMENT	typescriptreact	TryStatement · FinallyBlock	TryBlock	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	TryStatement · FinallyBlock	CatchClause	EXPRESSION	CatchClause	optional	\n	—	—	—
+STATEMENT	typescriptreact	TryStatement · FinallyBlock	FinallyBlock	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	name	EXPRESSION	Identifier	optional	—	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · Body	Body	BODY	Block	one	—	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	FunctionDeclaration · SemicolonToken	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · SemicolonToken	name	EXPRESSION	Identifier	optional	—	—	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescriptreact	FunctionDeclaration · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+STATEMENT	typescriptreact	FunctionDeclaration · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+STATEMENT	typescriptreact	ClassDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ClassDeclaration	name	EXPRESSION	Identifier	optional	\s	—	—	—
+STATEMENT	typescriptreact	ClassDeclaration	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescriptreact	ClassDeclaration	HeritageClauses	EXPRESSION	HeritageClause	sequence	—	—	—	—
+STATEMENT	typescriptreact	ClassDeclaration	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+STATEMENT	typescriptreact	InterfaceDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	InterfaceDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescriptreact	InterfaceDeclaration	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescriptreact	InterfaceDeclaration	HeritageClauses	EXPRESSION	HeritageClause	sequence	—	—	—	—
+STATEMENT	typescriptreact	InterfaceDeclaration	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+STATEMENT	typescriptreact	TypeAliasDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	TypeAliasDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescriptreact	TypeAliasDeclaration	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+STATEMENT	typescriptreact	TypeAliasDeclaration	Type	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	EnumDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	EnumDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescriptreact	EnumDeclaration	Members	EXPRESSION	EnumMember	sequence	\n	,\n	\n	4
+STATEMENT	typescriptreact	ModuleDeclaration · ModuleBlock	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ModuleDeclaration · ModuleBlock	Keyword	EXPRESSION	—	optional	—	—	\s	—
+STATEMENT	typescriptreact	ModuleDeclaration · ModuleBlock	name	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ModuleDeclaration · ModuleBlock	Attributes	EXPRESSION	—	optional	\swith\s	—	—	—
+STATEMENT	typescriptreact	ModuleDeclaration · ModuleBlock	Body	BODY	ModuleBlock	one	—	—	—	—
+STATEMENT	typescriptreact	ModuleDeclaration · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ModuleDeclaration · SemicolonToken	Keyword	EXPRESSION	—	optional	—	—	\s	—
+STATEMENT	typescriptreact	ModuleDeclaration · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ModuleDeclaration · SemicolonToken	Attributes	EXPRESSION	—	optional	\swith\s	—	—	—
+STATEMENT	typescriptreact	ImportEqualsDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ImportEqualsDeclaration	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+STATEMENT	typescriptreact	ImportEqualsDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+STATEMENT	typescriptreact	ImportEqualsDeclaration	ModuleReference	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ImportDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ImportDeclaration	ImportClause	EXPRESSION	—	optional	—	—	\sfrom\s	—
+STATEMENT	typescriptreact	ImportDeclaration	ModuleSpecifier	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ImportDeclaration	Attributes	EXPRESSION	ImportAttributes	optional	\s	—	—	—
+STATEMENT	typescriptreact	ExportAssignment	IsExportEquals	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ExportAssignment	Expression	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ExportDeclaration · ExportClause	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ExportDeclaration · ExportClause	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+STATEMENT	typescriptreact	ExportDeclaration · ExportClause	ExportClause	EXPRESSION	—	one	—	—	—	—
+STATEMENT	typescriptreact	ExportDeclaration · ExportClause	ModuleSpecifier	EXPRESSION	—	optional	\sfrom\s	—	—	—
+STATEMENT	typescriptreact	ExportDeclaration · ExportClause	Attributes	EXPRESSION	ImportAttributes	optional	\s	—	—	—
+STATEMENT	typescriptreact	ExportDeclaration · AsteriskToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+STATEMENT	typescriptreact	ExportDeclaration · AsteriskToken	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+STATEMENT	typescriptreact	ExportDeclaration · AsteriskToken	ModuleSpecifier	EXPRESSION	—	optional	\sfrom\s	—	—	—
+STATEMENT	typescriptreact	ExportDeclaration · AsteriskToken	Attributes	EXPRESSION	ImportAttributes	optional	\s	—	—	—
+STATEMENT	typescriptreact	NamespaceExportDeclaration	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	Identifier	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PrivateIdentifier	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	QualifiedName	Left	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	QualifiedName	Right	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ComputedPropertyName	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	StringLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NumericLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	BigIntLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	RegularExpressionLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NoSubstitutionTemplateLiteral	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateHead	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateMiddle	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateTail	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeParameter	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	TypeParameter	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeParameter	Constraint	EXPRESSION	—	optional	\sextends\s	—	—	—
+EXPRESSION	typescriptreact	TypeParameter	DefaultType	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	MappedTypeParameter	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	MappedTypeParameter	Constraint	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	InferTypeParameter	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	InferTypeParameter	Constraint	EXPRESSION	—	optional	\sextends\s	—	—	—
+EXPRESSION	typescriptreact	Parameter	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	Parameter	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	Parameter	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	Parameter	QuestionToken	EXPRESSION	QuestionToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	Parameter	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	Parameter	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	Decorator	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertySignature	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	PropertySignature	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertySignature	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	PropertySignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	PropertyDeclaration	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	PropertyDeclaration	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertyDeclaration	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	PropertyDeclaration	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	PropertyDeclaration	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	MethodSignature	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	MethodSignature	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	MethodSignature	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	MethodSignature	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	MethodSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	MethodSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	PostfixToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	MethodDeclaration · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	ClassStaticBlockDeclaration	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	Constructor · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	Constructor · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	Constructor · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	Constructor · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	Constructor · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	Constructor · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	Constructor · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	Constructor · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	Constructor · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	GetAccessor · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	GetAccessor · Body	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	GetAccessor · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	GetAccessor · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	GetAccessor · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	GetAccessor · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	GetAccessor · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	GetAccessor · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	GetAccessor · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	GetAccessor · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	GetAccessor · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	SetAccessor · Body	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	SetAccessor · Body	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	SetAccessor · Body	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	SetAccessor · Body	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	SetAccessor · Body	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	SetAccessor · Body	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	SetAccessor · SemicolonToken	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	SetAccessor · SemicolonToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	SetAccessor · SemicolonToken	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	SetAccessor · SemicolonToken	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	SetAccessor · SemicolonToken	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	CallSignature	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	CallSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	CallSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	ConstructSignature	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	ConstructSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	ConstructSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	IndexSignature	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	IndexSignature	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	IndexSignature	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	PropertyAssignment	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertyAssignment	Initializer	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ShorthandPropertyAssignment	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	ShorthandPropertyAssignment	ObjectAssignmentInitializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	SpreadAssignment	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	EnumMember	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	EnumMember	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	TypePredicate	AssertsModifier	EXPRESSION	AssertsKeyword	optional	—	—	\s	—
+EXPRESSION	typescriptreact	TypePredicate	ParameterName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypePredicate	Type	EXPRESSION	—	optional	\sis\s	—	—	—
+EXPRESSION	typescriptreact	TypeReference	TypeName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeReference	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	FunctionType	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	FunctionType	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	FunctionType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConstructorType	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	ConstructorType	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	ConstructorType	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	ConstructorType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeQuery	ExprName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeQuery	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	TypeLiteral	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+EXPRESSION	typescriptreact	ArrayType	ElementType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TupleType	Elements	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	OptionalType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	RestType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	UnionType	Types	EXPRESSION	—	sequence	—	\s|\s	—	—
+EXPRESSION	typescriptreact	IntersectionType	Types	EXPRESSION	—	sequence	—	\s&\s	—	—
+EXPRESSION	typescriptreact	ConditionalType	CheckType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalType	ExtendsType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalType	TrueType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalType	FalseType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	InferType	TypeParameter	EXPRESSION	InferTypeParameter	one	—	—	—	—
+EXPRESSION	typescriptreact	ParenthesizedType	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeOperator	Operator	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeOperator	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	IndexedAccessType	ObjectType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	IndexedAccessType	IndexType	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	MappedType	ReadonlyToken	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescriptreact	MappedType	TypeParameter	EXPRESSION	MappedTypeParameter	one	—	—	—	—
+EXPRESSION	typescriptreact	MappedType	NameType	EXPRESSION	—	optional	\sas\s	—	—	—
+EXPRESSION	typescriptreact	MappedType	QuestionToken	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	MappedType	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	MappedType	Members	EXPRESSION	—	sequence	\s	\s	—	—
+EXPRESSION	typescriptreact	LiteralType	Literal	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NamedTupleMember	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	NamedTupleMember	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	NamedTupleMember	QuestionToken	EXPRESSION	QuestionToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	NamedTupleMember	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateLiteralType	Head	EXPRESSION	TemplateHead	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateLiteralType	TemplateSpans	EXPRESSION	TemplateLiteralTypeSpan	sequence	—	—	—	—
+EXPRESSION	typescriptreact	TemplateLiteralTypeSpan	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateLiteralTypeSpan	Literal	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportType	IsTypeOf	EXPRESSION	TypeOfKeyword	optional	—	—	\s	—
+EXPRESSION	typescriptreact	ImportType	Argument	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportType	Attributes	EXPRESSION	ImportTypeNodeAttributes	optional	,\s	—	—	—
+EXPRESSION	typescriptreact	ImportType	Qualifier	EXPRESSION	—	optional	.	—	—	—
+EXPRESSION	typescriptreact	ImportType	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	ImportTypeNodeAttributes	Token	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportTypeNodeAttributes	Attributes	EXPRESSION	ImportAttribute	sequence	\s	,\s	\s	—
+EXPRESSION	typescriptreact	ObjectBindingPattern	Elements	EXPRESSION	BindingElement	sequence	\s	,\s	\s	—
+EXPRESSION	typescriptreact	ArrayBindingPattern	Elements	EXPRESSION	BindingElement	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	BindingElement	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	BindingElement	PropertyName	EXPRESSION	—	optional	—	—	:\s	—
+EXPRESSION	typescriptreact	BindingElement	name	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	BindingElement	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	ArrayLiteralExpression	Elements	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	ObjectLiteralExpression	Properties	EXPRESSION	—	sequence	\s	,\s	\s	—
+EXPRESSION	typescriptreact	PropertyAccessExpression · DotToken	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertyAccessExpression · DotToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertyAccessExpression · QuestionDotToken	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertyAccessExpression · QuestionDotToken	QuestionDotToken	EXPRESSION	QuestionDotToken	one	—	—	—	—
+EXPRESSION	typescriptreact	PropertyAccessExpression · QuestionDotToken	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ElementAccessExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ElementAccessExpression	QuestionDotToken	EXPRESSION	QuestionDotToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	ElementAccessExpression	ArgumentExpression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	CallExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	CallExpression	QuestionDotToken	EXPRESSION	QuestionDotToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	CallExpression	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	CallExpression	Arguments	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	NewExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NewExpression	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	NewExpression	Arguments	EXPRESSION	—	sequence	(	,\s	)	—
+EXPRESSION	typescriptreact	TaggedTemplateExpression	Tag	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TaggedTemplateExpression	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	TaggedTemplateExpression	Template	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ParenthesizedExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	FunctionExpression	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	FunctionExpression	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	FunctionExpression	name	EXPRESSION	Identifier	optional	—	—	—	—
+EXPRESSION	typescriptreact	FunctionExpression	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	FunctionExpression	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	FunctionExpression	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	FunctionExpression	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Block	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	ArrowFunction · Block	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	,>	—
+EXPRESSION	typescriptreact	ArrowFunction · Block	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Block	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Block	EqualsGreaterThanToken	EXPRESSION	EqualsGreaterThanToken	one	—	—	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Block	Body	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Expression	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	ArrowFunction · Expression	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	,>	—
+EXPRESSION	typescriptreact	ArrowFunction · Expression	Parameters	EXPRESSION	Parameter	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Expression	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Expression	EqualsGreaterThanToken	EXPRESSION	EqualsGreaterThanToken	one	—	—	—	—
+EXPRESSION	typescriptreact	ArrowFunction · Expression	Body	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	DeleteExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TypeOfExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	VoidExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	AwaitExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PrefixUnaryExpression	Operator	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PrefixUnaryExpression	Operand	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PostfixUnaryExpression	Operand	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	PostfixUnaryExpression	Operator	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	BinaryExpression	Left	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	BinaryExpression	OperatorToken	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	BinaryExpression	Right	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	BinaryExpression · CommaToken	Left	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	BinaryExpression · CommaToken	OperatorToken	EXPRESSION	CommaToken	one	—	—	—	—
+EXPRESSION	typescriptreact	BinaryExpression · CommaToken	Right	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalExpression	Condition	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalExpression	QuestionToken	EXPRESSION	QuestionToken	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalExpression	WhenTrue	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalExpression	ColonToken	EXPRESSION	ColonToken	one	—	—	—	—
+EXPRESSION	typescriptreact	ConditionalExpression	WhenFalse	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateExpression	Head	EXPRESSION	TemplateHead	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateExpression	TemplateSpans	EXPRESSION	TemplateSpan	sequence	—	—	—	—
+EXPRESSION	typescriptreact	TemplateSpan	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	TemplateSpan	Literal	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	YieldExpression	AsteriskToken	EXPRESSION	AsteriskToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	YieldExpression	Expression	EXPRESSION	—	optional	\s	—	—	—
+EXPRESSION	typescriptreact	SpreadElement	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ClassExpression	modifiers	EXPRESSION	—	sequence	—	\s	\s	—
+EXPRESSION	typescriptreact	ClassExpression	name	EXPRESSION	Identifier	optional	\s	—	—	—
+EXPRESSION	typescriptreact	ClassExpression	TypeParameters	EXPRESSION	TypeParameter	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	ClassExpression	HeritageClauses	EXPRESSION	HeritageClause	sequence	—	—	—	—
+EXPRESSION	typescriptreact	ClassExpression	Members	EXPRESSION	—	sequence	\n	\n	\n	4
+EXPRESSION	typescriptreact	ExpressionWithTypeArguments	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ExpressionWithTypeArguments	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	AsExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	AsExpression	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	SatisfiesExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	SatisfiesExpression	Type	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NonNullExpression	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	MetaProperty	KeywordToken	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	MetaProperty	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	HeritageClause	Token	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	HeritageClause	Types	EXPRESSION	—	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	CaseBlock	Clauses	EXPRESSION	—	sequence	\n	\n	\n	4
+EXPRESSION	typescriptreact	CaseClause	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	CaseClause	Statements	BODY	Statements	one	—	—	—	—
+EXPRESSION	typescriptreact	DefaultClause	Statements	BODY	Statements	one	—	—	—	—
+EXPRESSION	typescriptreact	CatchClause	VariableDeclaration	EXPRESSION	VariableDeclaration	optional	(	—	)\s	—
+EXPRESSION	typescriptreact	CatchClause	Block	BODY	Block	one	—	—	—	—
+EXPRESSION	typescriptreact	VariableDeclarationList	Flags	EXPRESSION	—	sequence	—	\s	—	—
+EXPRESSION	typescriptreact	VariableDeclarationList	Declarations	EXPRESSION	VariableDeclaration	sequence	—	,\s	—	—
+EXPRESSION	typescriptreact	VariableDeclaration	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	VariableDeclaration	ExclamationToken	EXPRESSION	ExclamationToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	VariableDeclaration	Type	EXPRESSION	—	optional	:\s	—	—	—
+EXPRESSION	typescriptreact	VariableDeclaration	Initializer	EXPRESSION	—	optional	\s=\s	—	—	—
+EXPRESSION	typescriptreact	ImportClause · name	PhaseModifier	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescriptreact	ImportClause · name	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportClause · NamedBindings	PhaseModifier	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescriptreact	ImportClause · NamedBindings	NamedBindings	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportClause · name · NamedBindings	PhaseModifier	EXPRESSION	—	optional	—	—	\s	—
+EXPRESSION	typescriptreact	ImportClause · name · NamedBindings	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportClause · name · NamedBindings	NamedBindings	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NamespaceImport	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	NamedImports	Elements	EXPRESSION	ImportSpecifier	sequence	\s	,\s	\s	—
+EXPRESSION	typescriptreact	ImportSpecifier	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+EXPRESSION	typescriptreact	ImportSpecifier	PropertyName	EXPRESSION	—	optional	—	—	\sas\s	—
+EXPRESSION	typescriptreact	ImportSpecifier	name	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	NamespaceExport	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	NamedExports	Elements	EXPRESSION	ExportSpecifier	sequence	\s	,\s	\s	—
+EXPRESSION	typescriptreact	ExportSpecifier	IsTypeOnly	EXPRESSION	TypeKeyword	optional	—	—	\s	—
+EXPRESSION	typescriptreact	ExportSpecifier	PropertyName	EXPRESSION	—	optional	—	—	\sas\s	—
+EXPRESSION	typescriptreact	ExportSpecifier	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportAttributes	Token	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportAttributes	Attributes	EXPRESSION	ImportAttribute	sequence	\s	,\s	\s	—
+EXPRESSION	typescriptreact	ImportAttribute	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ImportAttribute	Value	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	ExternalModuleReference	Expression	EXPRESSION	StringLiteral	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxElement	OpeningElement	EXPRESSION	JsxOpeningElement	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxElement	Children	EXPRESSION	—	sequence	—	—	—	—
+EXPRESSION	typescriptreact	JsxElement	ClosingElement	EXPRESSION	JsxClosingElement	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxSelfClosingElement	TagName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxSelfClosingElement	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	JsxSelfClosingElement	Attributes	EXPRESSION	JsxAttributes	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxFragment	OpeningFragment	EXPRESSION	JsxOpeningFragment	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxFragment	Children	EXPRESSION	—	sequence	—	—	—	—
+EXPRESSION	typescriptreact	JsxFragment	ClosingFragment	EXPRESSION	JsxClosingFragment	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxOpeningElement	TagName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxOpeningElement	TypeArguments	EXPRESSION	—	sequence	<	,\s	>	—
+EXPRESSION	typescriptreact	JsxOpeningElement	Attributes	EXPRESSION	JsxAttributes	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxClosingElement	TagName	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxText	Text	TEXT	—	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxAttributes	Properties	EXPRESSION	—	sequence	\s	\s	—	—
+EXPRESSION	typescriptreact	JsxAttribute	name	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxAttribute	Initializer	EXPRESSION	—	optional	=	—	—	—
+EXPRESSION	typescriptreact	JsxSpreadAttribute	Expression	EXPRESSION	—	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxExpression	DotDotDotToken	EXPRESSION	DotDotDotToken	optional	—	—	—	—
+EXPRESSION	typescriptreact	JsxExpression	Expression	EXPRESSION	—	optional	—	—	—	—
+EXPRESSION	typescriptreact	JsxNamespacedName	Namespace	EXPRESSION	Identifier	one	—	—	—	—
+EXPRESSION	typescriptreact	JsxNamespacedName	name	EXPRESSION	Identifier	one	—	—	—	—

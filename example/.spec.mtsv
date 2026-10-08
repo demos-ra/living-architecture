@@ -1,0 +1,61 @@
+1-folders
+kind	place	holds
+—	app	—
+2-modules
+kind	place	holds
+{{name}} · .ts	util	—
+{{name}} · .json	data	—
+{{name}} · .css	styles	—
+{{name}} · .prisma	schema	—
+3-statements
+kind	place	holds
+FunctionDeclaration · Body	util.ts#/SourceFile/0	—
+ReturnStatement	util.ts#/SourceFile/0/Body/0	—
+value	data.json#/JSON-text/0	—
+model_declaration	schema.prisma#/schema/0	—
+field_declaration	schema.prisma#/schema/0/model_contents/0	—
+qualified rule	styles.css#/stylesheet/0	—
+list of declarations	styles.css#/stylesheet/0/block/0	—
+declaration	styles.css#/stylesheet/0/block/0/declarations/0	—
+4-expressions
+kind	place	holds
+ExportKeyword	util.ts#/SourceFile/0/modifiers/0	—
+—	util.ts#/SourceFile/0/name	—
+—	util.ts#/SourceFile/0/Parameters/0	—
+Identifier	util.ts#/SourceFile/0/Parameters/0/name	—
+NumberKeyword	util.ts#/SourceFile/0/Parameters/0/Type	—
+—	util.ts#/SourceFile/0/Parameters/1	—
+Identifier	util.ts#/SourceFile/0/Parameters/1/name	—
+NumberKeyword	util.ts#/SourceFile/0/Parameters/1/Type	—
+NumberKeyword	util.ts#/SourceFile/0/Type	—
+BinaryExpression	util.ts#/SourceFile/0/Body/0/Expression	—
+Identifier	util.ts#/SourceFile/0/Body/0/Expression/Left	—
+PlusToken	util.ts#/SourceFile/0/Body/0/Expression/OperatorToken	—
+Identifier	util.ts#/SourceFile/0/Body/0/Expression/Right	—
+object	data.json#/JSON-text/0/value	—
+—	data.json#/JSON-text/0/value/member/0	—
+array	data.json#/JSON-text/0/value/member/0/value	—
+number	data.json#/JSON-text/0/value/member/0/value/value/0	—
+number	data.json#/JSON-text/0/value/member/0/value/value/1	—
+MODEL_KEYWORD	schema.prisma#/schema/0/keyword	—
+identifier	schema.prisma#/schema/0/model_contents/0/field_type	—
+—	schema.prisma#/schema/0/model_contents/0/field_attribute/0	—
+ident-token	styles.css#/stylesheet/0/prelude/0	—
+ident-token	styles.css#/stylesheet/0/block/0/declarations/0/value/0	—
+5-texts
+kind	place	holds
+—	util.ts#/SourceFile/0/name/Text	add
+—	util.ts#/SourceFile/0/Parameters/0/name/Text	a
+—	util.ts#/SourceFile/0/Parameters/1/name/Text	b
+—	util.ts#/SourceFile/0/Body/0/Expression/Left/Text	a
+—	util.ts#/SourceFile/0/Body/0/Expression/Right/Text	b
+—	data.json#/JSON-text/0/value/member/0/string/char	a
+—	data.json#/JSON-text/0/value/member/0/value/value/0/int	1
+—	data.json#/JSON-text/0/value/member/0/value/value/1/int	2
+—	schema.prisma#/schema/0/identifier/identifier	User
+—	schema.prisma#/schema/0/model_contents/0/identifier/identifier	id
+—	schema.prisma#/schema/0/model_contents/0/field_type/identifier	Int
+—	schema.prisma#/schema/0/model_contents/0/field_attribute/0/path/path	id
+—	styles.css#/stylesheet/0/prelude/0/value	a
+—	styles.css#/stylesheet/0/block/0/declarations/0/name/value	color
+—	styles.css#/stylesheet/0/block/0/declarations/0/value/0/value	red

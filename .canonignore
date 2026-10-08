@@ -1,0 +1,13 @@
+README.md
+AGENTS.md
+LICENSE
+NOTICE
+EXCEPTION.md
+CLA.md
+SECURITY.md
+.gitattributes
+generate.py
+check.py
+.gitignore
+__pycache__/
+.~lock.*#

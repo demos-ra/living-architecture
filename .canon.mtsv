@@ -1,0 +1,208 @@
+1-structure
+container	part	requirement	rationale
+—	—	every container MUST be one of PROJECT, FOLDER, MODULE or FILE, the LAYOUT on disk, or BODY, STATEMENT, EXPRESSION or TEXT, the SYNTAX in a FILE, outermost first	CSS Syntax 3 and Prisma: each nests as these eight levels
+—	—	every container MUST declare its KIND, PLACE and HOLDS	—
+—	KIND	every container MUST have a KIND within its parent's KIND, or no KIND	—
+—	PLACE	every container MUST be in its parent, addressed by name in LAYOUT and by position or placeholder in SYNTAX	—
+—	PLACE	every address MUST be unique	RFC 6901: a pointer resolves to one value
+—	HOLDS	every container MUST hold only what its HOLDS lists, outermost first then in dependency order	—
+—	HOLDS	every container held MUST be walked	—
+—	HOLDS	every container MUST hold each container its HOLDS lists as one, optional or sequence	ASDL: a field is plain, optional (?) or a sequence (*)
+—	HOLDS	every container MUST hold its fills between its placeholder's prefix and suffix, joined by its separator, indented by its offset	Oppen 1979: a block indents offset spaces relative to the indentation of the enclosing block
+PROJECT	—	—	—
+PROJECT	KIND	a PROJECT MUST have no KIND	—
+PROJECT	PLACE	a PROJECT MUST be in the filesystem, addressed by path	—
+PROJECT	HOLDS	a PROJECT MUST hold only .canon.mtsv, .templates.mtsv, .canonignore and the root FOLDER	—
+FOLDER	—	—	—
+FOLDER	KIND	a FOLDER MUST have no KIND	—
+FOLDER	PLACE	a FOLDER MUST be in its parent FOLDER, addressed by name	—
+FOLDER	PLACE	the root FOLDER MUST be in the PROJECT, addressed by the name .	POSIX: . names the current directory
+FOLDER	HOLDS	a FOLDER MUST hold only its .spec.mtsv, FOLDER and MODULE	—
+MODULE	—	—	—
+MODULE	KIND	a MODULE MUST have a KIND	—
+MODULE	PLACE	a MODULE MUST be in its FOLDER, addressed by name	—
+MODULE	HOLDS	a MODULE MUST hold only FILE	—
+FILE	—	—	—
+FILE	KIND	a FILE MUST have a KIND, which makes it a GENERATED FILE or an ASSET FILE	—
+FILE	PLACE	a FILE MUST be in its MODULE, addressed by the name its MODULE's KIND fixes	—
+FILE	HOLDS	a GENERATED FILE MUST hold only one BODY, and an ASSET FILE no BODY	—
+BODY	—	—	—
+BODY	KIND	a BODY MUST have a KIND	—
+BODY	PLACE	a BODY MUST be in its FILE, STATEMENT or EXPRESSION, addressed by placeholder	—
+BODY	HOLDS	a BODY MUST hold only STATEMENT	ESTree: a body is a sequence of statements
+STATEMENT	—	—	—
+STATEMENT	KIND	a STATEMENT MUST have a KIND	—
+STATEMENT	PLACE	a STATEMENT MUST be in its BODY, addressed by position	—
+STATEMENT	HOLDS	a STATEMENT MUST hold only EXPRESSION and BODY	—
+EXPRESSION	—	—	—
+EXPRESSION	KIND	an EXPRESSION MUST have a KIND	—
+EXPRESSION	PLACE	an EXPRESSION MUST be in its STATEMENT or EXPRESSION, addressed by placeholder	—
+EXPRESSION	HOLDS	an EXPRESSION MUST hold only EXPRESSION, BODY and TEXT	ESTree: an expression holds expressions, and a function expression holds a body
+TEXT	—	—	—
+TEXT	KIND	a TEXT MUST have no KIND	—
+TEXT	PLACE	a TEXT MUST be in its EXPRESSION, addressed by placeholder	—
+TEXT	HOLDS	a TEXT MUST hold only its characters	—
+2-sources
+container	part	requirement	rationale
+—	—	every RESERVED name, .canon.mtsv, .templates.mtsv, .canonignore and .spec.mtsv, MUST have a leading dot	git: .git and .github reserve a tool's own names by a leading dot
+—	—	every RESERVED name MUST be declared in .canon.mtsv and never in .spec.mtsv	—
+—	—	every source MUST be an MTSV file of sheets, each sheet a header then rows	draft-demosra-mtsv-01: a form feed separates sheets
+—	—	every sheet name MUST be unique in its file	1-structure: every address MUST be unique
+—	—	every sheet MUST have exactly the header its schema declares	—
+—	—	every cell MUST write \\n \\t \\f \\r \\\\ \\s for a line break, a tab, a form feed, a carriage return, a backslash and an edge space	draft-demosra-mtsv-01: a field cannot hold HT, LF, FF or CR
+—	—	every cell that does not apply MUST be —	—
+—	—	— in a container or part cell MUST mean every	DMN: a dash in an input entry means any value
+—	—	a PROJECT's .canon.mtsv MUST hold the four canon sheets	—
+—	—	a PROJECT's .canon.mtsv MUST be identical in every PROJECT and never edited	—
+—	—	the schema of .canon.mtsv sheets 1-structure, 2-sources, 3-generation and 4-verification MUST be container · part · requirement · rationale	—
+—	—	a requirement cell MUST be one MUST sentence	RFC 2119: MUST is the keyword of a binding requirement
+—	—	every defined term MUST be written in UPPERCASE	—
+—	—	a rationale cell MUST be authority: fact, or —	ISO/IEC Directives Part 2: a specification's text is normative or informative, nothing else
+—	—	a PROJECT's .templates.mtsv MUST hold the six templates sheets	—
+—	—	the schema of .templates.mtsv sheets 1-modules, 2-files, 3-bodies, 4-statements and 5-expressions MUST be notation · kind · template · encoding	—
+—	—	the schema of .templates.mtsv sheet 6-placeholders MUST be container · notation · kind · place · holds · holds_kind · qualifier · prefix · separator · suffix · offset	—
+—	—	a PROJECT's .canonignore MUST list what is not the PROJECT, in .gitignore syntax	—
+—	—	a FOLDER's .spec.mtsv MUST hold the five spec sheets, always present, header only when empty	—
+—	—	the schema of .spec.mtsv sheets 1-folders, 2-modules, 3-statements, 4-expressions and 5-texts MUST be kind · place · holds	—
+—	KIND	every KIND MUST be fixed by the holds_kind of the placeholder that holds its container or, where that is —, named in .spec.mtsv, and defined in .templates.mtsv, beginning at MODULE, or be in no source	—
+—	PLACE	every PLACE MUST be an address: a name in LAYOUT, and in SYNTAX the FILE's path from its FOLDER, then #, then /placeholder for each step and /position where a placeholder holds a sequence, each STATEMENT of a BODY by position straight after the placeholder that holds the BODY	RFC 6901: a JSON Pointer in URI fragment form, as $ref uses it
+—	PLACE	every place cell that is not — MUST be unique in its .spec.mtsv	1-structure: every address MUST be unique
+—	HOLDS	every HOLDS MUST be filled through a template, characters with {{placeholder}} placeholders, a literal { written as \\{ and a literal } as \\}, each placeholder a row of .templates.mtsv sheet 6-placeholders, filled by the container its holds_kind fixes where its qualifier is one, or else by spec rows	Mustache: {{ }} delimits a placeholder
+—	HOLDS	every container held MUST be in its parent's HOLDS	—
+—	HOLDS	a placeholder MUST take one fill, an optional fill, or a sequence of fills, as its qualifier one, optional or sequence says, and qualifier one where it holds FILE or BODY	ASDL: a field is plain, optional (?) or a sequence (*)
+—	HOLDS	a placeholder's prefix, separator, suffix and offset MUST be in .templates.mtsv sheet 6-placeholders, as the characters before, between and after its fills and the spaces they are indented by, a separator applying only to qualifier sequence and a prefix and suffix only to qualifier optional or sequence	—
+PROJECT	—	—	—
+PROJECT	KIND	a PROJECT's KIND MUST be in no source	—
+PROJECT	PLACE	a PROJECT's PLACE MUST be in .canon.mtsv, as the project root	—
+PROJECT	HOLDS	a PROJECT's HOLDS MUST be in .canon.mtsv, as names	—
+FOLDER	—	—	—
+FOLDER	KIND	a FOLDER's KIND MUST be in no source	—
+FOLDER	PLACE	a FOLDER's PLACE MUST be in its parent's .spec.mtsv sheet 1-folders place, as its name, one row per FOLDER	—
+FOLDER	PLACE	the root FOLDER's PLACE MUST be in .canon.mtsv, as .	—
+FOLDER	HOLDS	a FOLDER's HOLDS MUST be in its own .spec.mtsv	—
+MODULE	—	—	—
+MODULE	KIND	a MODULE's KIND MUST be in .spec.mtsv sheet 2-modules kind, defined in .templates.mtsv sheet 1-modules kind, one row per MODULE KIND	—
+MODULE	PLACE	a MODULE's PLACE MUST be in its FOLDER's .spec.mtsv sheet 2-modules place, as its name where its KIND holds {{name}}, one row per MODULE	—
+MODULE	HOLDS	a MODULE's HOLDS MUST be in .templates.mtsv sheet 6-placeholders, one row per FILE of its KIND, container MODULE, holds FILE	—
+FILE	—	—	—
+FILE	KIND	a FILE's KIND MUST be in .templates.mtsv sheet 6-placeholders holds_kind of its placeholder row, defined in .templates.mtsv sheet 2-files kind, one row per FILE KIND, with notation — for an ASSET FILE	—
+FILE	PLACE	a FILE's PLACE MUST be in .templates.mtsv sheet 6-placeholders place of its placeholder row, as a path with its extension in which the placeholder {{name}} is filled with the MODULE's name	—
+FILE	HOLDS	a GENERATED FILE's HOLDS MUST be in .templates.mtsv sheet 2-files template, through one placeholder holding BODY, and encoding, as the character encoding its notation names, and an ASSET FILE's HOLDS in no source	IANA Character Sets: the name of a character encoding
+BODY	—	—	—
+BODY	KIND	a BODY's KIND MUST be in .templates.mtsv sheet 6-placeholders holds_kind of the placeholder that holds it, defined in .templates.mtsv sheet 3-bodies kind, one row per BODY KIND, with its parent's notation	—
+BODY	PLACE	a BODY's PLACE MUST be in .templates.mtsv sheet 6-placeholders place of the placeholder that holds it	—
+BODY	HOLDS	a BODY's HOLDS MUST be in .templates.mtsv sheet 3-bodies template, through one placeholder holding STATEMENT, holds_kind —, and in .spec.mtsv sheet 3-statements for the rows that fill it	—
+STATEMENT	—	—	—
+STATEMENT	KIND	a STATEMENT's KIND MUST be in .templates.mtsv sheet 6-placeholders holds_kind of the placeholder that holds it or, where that is —, in .spec.mtsv sheet 3-statements kind, defined in .templates.mtsv sheet 4-statements kind, one row per STATEMENT KIND, with its parent's notation	—
+STATEMENT	PLACE	a STATEMENT's PLACE MUST be in .templates.mtsv sheet 6-placeholders place of the placeholder that holds it where that fixes its KIND with qualifier one, or else in its FOLDER's .spec.mtsv sheet 3-statements place, as its address, one row per STATEMENT	—
+STATEMENT	HOLDS	a STATEMENT's HOLDS MUST be in .templates.mtsv sheet 4-statements template, its placeholders as rows of .templates.mtsv sheet 6-placeholders, and in .spec.mtsv sheet 4-expressions for the rows that fill them	—
+EXPRESSION	—	—	—
+EXPRESSION	KIND	an EXPRESSION's KIND MUST be in .templates.mtsv sheet 6-placeholders holds_kind of the placeholder that holds it or, where that is —, in .spec.mtsv sheet 4-expressions kind, defined in .templates.mtsv sheet 5-expressions kind, one row per EXPRESSION KIND, with its parent's notation	—
+EXPRESSION	PLACE	an EXPRESSION's PLACE MUST be in .templates.mtsv sheet 6-placeholders place of the placeholder that holds it where that fixes its KIND with qualifier one, or else in its FOLDER's .spec.mtsv sheet 4-expressions place, as its address, one row per EXPRESSION	—
+EXPRESSION	HOLDS	an EXPRESSION's HOLDS MUST be in .templates.mtsv sheet 5-expressions template, its placeholders as rows of .templates.mtsv sheet 6-placeholders, and in .spec.mtsv sheet 4-expressions and .spec.mtsv sheet 5-texts for the rows that fill them	—
+TEXT	—	—	—
+TEXT	KIND	a TEXT's KIND MUST be in no source	—
+TEXT	PLACE	a TEXT's PLACE MUST be in its FOLDER's .spec.mtsv sheet 5-texts place, as its address, one row per TEXT	—
+TEXT	HOLDS	a TEXT's HOLDS MUST be in .spec.mtsv sheet 5-texts holds, its characters exactly as the output writes them, escapes included	—
+3-generation
+container	part	requirement	rationale
+—	—	the generator MUST implement .canon.mtsv	—
+—	—	the generator MUST read only .templates.mtsv and .spec.mtsv	—
+—	—	the generator MUST write, as the output, every directory and GENERATED FILE the walk reaches, and nothing else	—
+—	—	the generator MUST hardcode nothing .templates.mtsv and .spec.mtsv do not say	—
+—	—	the generator MUST be throwaway	2-sources: the sources hold everything, so the generator holds nothing worth keeping
+—	KIND	the generator MUST look up every KIND's template in .templates.mtsv, and none where there is no KIND	—
+—	PLACE	the generator MUST write every container at its PLACE, LAYOUT at a path on disk and SYNTAX at an address in a FILE, taking order from position only, never from row order, a directory having none	POSIX: readdir returns entries in no defined order
+—	PLACE	the generator MUST write each container at its own address	—
+—	HOLDS	the generator MUST write every HOLDS as its template, each placeholder filled from what its 6-placeholders row holds	—
+—	HOLDS	the generator MUST walk every container's HOLDS, writing each container held	—
+—	HOLDS	the generator MUST write nothing for an optional placeholder or a sequence that is unfilled	—
+—	HOLDS	the generator MUST write a placeholder as its prefix, its fills joined by its separator, then its suffix, and follow every line break it writes with the indentation of the container that holds the next character, the enclosing indentation plus the placeholder's offset for a fill, in spaces, and none on an empty line	Oppen 1979: a block indents offset spaces relative to the indentation of the enclosing block
+PROJECT	—	—	—
+PROJECT	KIND	the generator MUST look up no KIND for a PROJECT	—
+PROJECT	PLACE	the generator MUST write a PROJECT at the project root	—
+PROJECT	HOLDS	the generator MUST walk a PROJECT's HOLDS as .templates.mtsv, read once, then the root FOLDER	—
+FOLDER	—	—	—
+FOLDER	KIND	the generator MUST look up no KIND for a FOLDER	—
+FOLDER	PLACE	the generator MUST write a FOLDER as a directory at its name in its parent's directory	—
+FOLDER	PLACE	the generator MUST write the root FOLDER as the project root	—
+FOLDER	HOLDS	the generator MUST walk a FOLDER's HOLDS as its .spec.mtsv, read once, then each FOLDER and MODULE named there	—
+MODULE	—	—	—
+MODULE	KIND	the generator MUST look up a MODULE's KIND in .templates.mtsv sheet 1-modules, by the KIND its spec row names	—
+MODULE	PLACE	the generator MUST write a MODULE at its name, filling {{name}} in each path of its KIND	—
+MODULE	HOLDS	the generator MUST walk a MODULE's HOLDS as each placeholder row of its KIND, a FILE at its path	—
+FILE	—	—	—
+FILE	KIND	the generator MUST look up a FILE's KIND in .templates.mtsv sheet 2-files, by the holds_kind its placeholder row fixes	—
+FILE	PLACE	the generator MUST write a GENERATED FILE at its placeholder row's path, creating parent directories as needed, and leave an ASSET FILE at its placeholder row's path	POSIX: mkdir -p creates missing parent directories
+FILE	HOLDS	the generator MUST write a GENERATED FILE as its template, with its BODY in its placeholder, in its encoding, and nothing for an ASSET FILE	—
+BODY	—	—	—
+BODY	KIND	the generator MUST look up a BODY's KIND in .templates.mtsv sheet 3-bodies, by the holds_kind its placeholder row fixes, with its parent's notation	—
+BODY	PLACE	the generator MUST write a BODY at the placeholder that holds it	—
+BODY	HOLDS	the generator MUST write a BODY as its template, with each STATEMENT by position in its placeholder	—
+STATEMENT	—	—	—
+STATEMENT	KIND	the generator MUST look up a STATEMENT's KIND in .templates.mtsv sheet 4-statements, by the holds_kind its placeholder row fixes or, where that is —, the KIND its spec row names, with its parent's notation	—
+STATEMENT	PLACE	the generator MUST write a STATEMENT at its address, by position	—
+STATEMENT	HOLDS	the generator MUST write a STATEMENT as its template, each placeholder filled from an EXPRESSION or a BODY, or unfilled	—
+EXPRESSION	—	—	—
+EXPRESSION	KIND	the generator MUST look up an EXPRESSION's KIND in .templates.mtsv sheet 5-expressions, by the holds_kind its placeholder row fixes or, where that is —, the KIND its spec row names, with its parent's notation	—
+EXPRESSION	PLACE	the generator MUST write an EXPRESSION at the placeholder at its address	—
+EXPRESSION	HOLDS	the generator MUST write an EXPRESSION as its template, each placeholder filled from an EXPRESSION, a BODY or a TEXT, or unfilled	—
+TEXT	—	—	—
+TEXT	KIND	the generator MUST look up no KIND for a TEXT	—
+TEXT	PLACE	the generator MUST write a TEXT at the placeholder at its address	—
+TEXT	HOLDS	the generator MUST write a TEXT as its characters, verbatim	—
+4-verification
+container	part	requirement	rationale
+—	—	the checker MUST implement .canon.mtsv	—
+—	—	the checker MUST read only .templates.mtsv, .spec.mtsv and what is on disk, less what .canonignore lists	—
+—	—	the checker MUST hardcode nothing .templates.mtsv and .spec.mtsv do not say	—
+—	—	the checker MUST be throwaway	2-sources: the sources hold everything, so the checker holds nothing worth keeping
+—	—	the checker MUST regenerate the output and compare it with what is on disk	—
+—	—	a finding MUST be MISSING where the sources say it and it is not there, EXTRA where it is there and no source says it, or CHANGED where it is there and differs	—
+—	—	every finding MUST be fixed in the source that owns it, never in the output	3-generation: the output is written from the sources, never the reverse
+—	—	the checker MUST find EXTRA where a .spec.mtsv names a RESERVED name	2-sources: every RESERVED name is declared in .canon.mtsv and never in .spec.mtsv
+—	—	the checker MUST find EXTRA where two sheets of one source share a name	2-sources: every sheet name is unique in its file
+—	—	the checker MUST find MISSING where .canon.mtsv lacks one of its four sheets, .templates.mtsv one of its six sheets, or a .spec.mtsv one of its five sheets	—
+—	—	the checker MUST find CHANGED where a canon sheet is not identical to the canon it implements	2-sources: .canon.mtsv is identical in every PROJECT and never edited
+—	—	the checker MUST find CHANGED where a canon, templates or spec sheet's header is not its schema's	—
+—	—	the checker MUST find CHANGED where a cell that does not apply is not —	2-sources: every cell that does not apply is —
+—	KIND	the checker MUST find MISSING where a KIND is not in .templates.mtsv, and check none where there is no KIND	—
+—	PLACE	the checker MUST find MISSING where a PLACE the sources name has nothing on disk, and EXTRA where disk has what no source names	—
+—	PLACE	the checker MUST find EXTRA where two containers share one address	1-structure: every address MUST be unique
+—	HOLDS	the checker MUST find MISSING where a template's placeholder is not a row of .templates.mtsv sheet 6-placeholders, EXTRA where a 6-placeholders row is no placeholder of its template, EXTRA where a fill is not the container and KIND its placeholder holds, and EXTRA where a spec row fills a placeholder that fixes its KIND with qualifier one	—
+—	HOLDS	the checker MUST walk every container's HOLDS, checking each container held	—
+—	HOLDS	the checker MUST find MISSING where a placeholder whose qualifier is one has no fill, EXTRA where a placeholder whose qualifier is not a sequence has more than one, and CHANGED where a placeholder holding FILE or BODY has a qualifier other than one	—
+—	HOLDS	the checker MUST find CHANGED where what a container holds on disk is not equal to its regenerated output	—
+PROJECT	—	—	—
+PROJECT	KIND	the checker MUST check no KIND for a PROJECT	—
+PROJECT	PLACE	the checker MUST find MISSING where the project root does not exist	—
+PROJECT	HOLDS	the checker MUST find MISSING where .canon.mtsv, .templates.mtsv or .canonignore is not at the project root	—
+FOLDER	—	—	—
+FOLDER	KIND	the checker MUST check no KIND for a FOLDER	—
+FOLDER	PLACE	the checker MUST find MISSING where a FOLDER named in its parent's .spec.mtsv sheet 1-folders is not a directory on disk, and EXTRA where a directory is not named in its parent's .spec.mtsv sheet 1-folders and not created by a placeholder row's path	—
+FOLDER	PLACE	the checker MUST check the root FOLDER as the project root	—
+FOLDER	HOLDS	the checker MUST find MISSING where a FOLDER's .spec.mtsv is not there	—
+MODULE	—	—	—
+MODULE	KIND	the checker MUST find MISSING where a MODULE's KIND is not in .templates.mtsv sheet 1-modules	—
+MODULE	PLACE	the checker MUST check a MODULE's PLACE through each FILE it holds, nothing more	—
+MODULE	HOLDS	the checker MUST walk a MODULE's HOLDS as each FILE its KIND's placeholder rows name	—
+FILE	—	—	—
+FILE	KIND	the checker MUST find MISSING where a FILE's KIND, fixed by its placeholder row, is not in .templates.mtsv sheet 2-files	—
+FILE	PLACE	the checker MUST find MISSING where a FILE is not on disk at its placeholder row's path, and EXTRA where a file on disk is not RESERVED and is at no placeholder row's path	—
+FILE	HOLDS	the checker MUST find CHANGED where a GENERATED FILE's bytes on disk are not equal to its regenerated output in its encoding, and check nothing more for an ASSET FILE	—
+BODY	—	—	—
+BODY	KIND	the checker MUST find MISSING where a BODY's KIND, fixed by its placeholder row, is not in .templates.mtsv sheet 3-bodies, with its parent's notation	—
+BODY	PLACE	the checker MUST check a BODY's PLACE through the template that holds it, nothing more	—
+BODY	HOLDS	the checker MUST walk a BODY's HOLDS as each STATEMENT it holds	—
+STATEMENT	—	—	—
+STATEMENT	KIND	the checker MUST find MISSING where a STATEMENT's KIND is not in .templates.mtsv sheet 4-statements, with its parent's notation	—
+STATEMENT	PLACE	the checker MUST find EXTRA where a STATEMENT's address is not a placeholder of its parent	—
+STATEMENT	HOLDS	the checker MUST walk a STATEMENT's HOLDS as each placeholder of its template, filled from an EXPRESSION or a BODY, or unfilled	—
+EXPRESSION	—	—	—
+EXPRESSION	KIND	the checker MUST find MISSING where an EXPRESSION's KIND is not in .templates.mtsv sheet 5-expressions, with its parent's notation	—
+EXPRESSION	PLACE	the checker MUST find EXTRA where an EXPRESSION's address is not a placeholder of its parent	—
+EXPRESSION	HOLDS	the checker MUST walk an EXPRESSION's HOLDS as each placeholder of its template, filled from an EXPRESSION, a BODY or a TEXT, or unfilled	—
+TEXT	—	—	—
+TEXT	KIND	the checker MUST check no KIND for a TEXT	—
+TEXT	PLACE	the checker MUST find EXTRA where a TEXT's address is not a placeholder of its EXPRESSION	—
+TEXT	HOLDS	the checker MUST find CHANGED where a TEXT's characters on disk are not equal to its spec cell	—
