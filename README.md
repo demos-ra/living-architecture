@@ -2,11 +2,13 @@
 
 **Stop managing code. Manage grids.**
 
+AI agents lose track of large codebases, break files they weren't asked to touch, and run out of context. Here an agent never edits code: it edits a few small grids, and spec-driven, deterministic code generation writes the whole codebase from them.
+
 You describe a project in a few spreadsheet-like grids. A generator writes every file of the codebase from them, byte for byte. A checker proves the code on disk is exactly what the grids say. The codebase is output, the way a compiled binary is output: you never edit it, you regenerate it.
 
 | You are | What changes |
 |---|---|
-| **Vibe coder** | You stop asking a model to edit a growing pile of files and hoping nothing else breaks. You change rows; the whole codebase follows. Nothing drifts, because nothing is written by hand. |
+| **Vibe coder** | Vibe coding without the mess: you stop asking a model to edit a growing pile of files and hoping nothing else breaks. You change rows; the whole codebase follows. Nothing drifts, because nothing is written by hand. |
 | **Developer** | Code becomes deterministic output. A pull request is a diff of grid rows. The checker turns "does the code match the design?" into a yes or a numbered list of exactly what differs and where to fix it. |
 | **AI model or agent** | You no longer hold a codebase in your context. You read three small files with a closed vocabulary, write rows at exact addresses, run two commands, and stop at 0 findings. Every finding names the file and row that owns it. |
 
@@ -152,7 +154,7 @@ The same rules as [AGENTS.md](AGENTS.md), for people. Each comes from `.canon.mt
 | `css` | CSS Syntax Module Level 3 | CSSOM |
 | `json` | RFC 8259 | ECMA-262 `JSON.stringify` |
 | `prisma` | Prisma `datamodel.pest` (prisma-engines) | `prisma format` |
-| `typescript`, `typescriptreact` | TypeScript's parser (typescript-go) | TypeScript's printer |
+| `typescript`, `typescriptreact` (React) | TypeScript's parser (typescript-go) | TypeScript's printer |
 
 Module kinds follow Next.js file conventions. Generated files are UTF-8 and end with a line break. Asset files (`.ico`, `.png`, `.svg`, `.mtsv`, …) are left as they are.
 
